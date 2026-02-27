@@ -1,0 +1,15 @@
+.text_input {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+.label {
+    font-size: 10;
+}
+
+.input {
+    border: 1px solid gray;
+    border-radius: 3px;
+}
