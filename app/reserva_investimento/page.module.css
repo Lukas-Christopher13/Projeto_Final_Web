@@ -30,16 +30,3 @@
     font-size: 20;
     color: darkcyan;
 }
-
-.historico{
-    display: flex;
-}
-
-.titulo_historico {
-    font-size: 12;
-}
-
-.cabesalho_tabela_historico {
-    color: gray;
-    background-color: aliceblue;
-}
