@@ -13,3 +13,7 @@
     border: 1px solid gray;
     border-radius: 3px;
 }
+
+.input::placeholder {
+    font-size: 10;
+}

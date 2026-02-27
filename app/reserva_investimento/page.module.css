@@ -1,3 +1,7 @@
+.reserva_investimento {
+    background-color: aliceblue;
+}
+
 .titulo_do_grafico {
     font-size: 14;
 }
@@ -25,28 +29,6 @@
 .total_guardado {
     font-size: 20;
     color: darkcyan;
-}
-
-.adicionar_reserva {
-    height: 200px;
-}
-
-.titulo_adicionar_reserva {
-    font-size: 12;
-}
-
-.adicionar_reserva_form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.adicionar_reserva_form > * {
-    flex: 1 1 45%;
-}
-
-.adicionar_reserva_form > *:last-child {
-    flex: 1 1 100%;
 }
 
 .historico{

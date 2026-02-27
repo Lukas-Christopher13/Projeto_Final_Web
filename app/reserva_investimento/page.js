@@ -3,9 +3,11 @@ import Total from "./Total"
 import AdicionarAReserva from "./adicionar_a_reserva"
 import Historico from "./historico"
 
+import styles from "@/app/reserva_investimento/page.module.css"
+
 export default function ReservasInvestimentos() {
     return (
-        <main>
+        <main className={styles.reserva_investimento}>
             <h1>Minhas Reservas</h1>
 
             <Grafico></Grafico>
