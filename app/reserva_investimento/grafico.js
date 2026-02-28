@@ -10,19 +10,23 @@ import {
     CartesianGrid,
     Legend
 } from 'recharts'
+import { useEffect, useState } from 'react'
 
 import styles  from "@/app/reserva_investimento/grafico.module.css"
 
-const dados = [
-    { data: "2026-01-01", valor: 1000 },
-    { data: "2026-02-01", valor: 1500 },
-    { data: "2026-03-01", valor: 2200 },
-    { data: "2026-04-01", valor: 3100 },
-    { data: "2026-05-01", valor: 4200 },
-    { data: "2026-06-01", valor: 5800 }
-]
 
 export default function Grafico() {
+    const [dados, setDados] = useState([])
+
+    useEffect(() => {
+        async function getDados() {
+            const response = await fetch("http://localhost:3000/api/aportes");
+            const data = await response.json();
+            setDados(data)
+        }
+        getDados()
+    }, [])
+    
     return (
         <main className={styles.container}>
             <p className={styles.titulo}>Evolução das Reservas</p>
