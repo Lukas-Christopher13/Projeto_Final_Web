@@ -1,0 +1,7 @@
+[
+    { "valor": 1500.5, "data": "2025-01-10T00:00:00.000Z", "fonte": "Salário" },
+    { "valor": 300.75, "data": "2025-01-15T00:00:00.000Z", "fonte": "Freelance" },
+    { "valor": 1200.0, "data": "2025-02-05T00:00:00.000Z", "fonte": "Salário" },
+    { "valor": 450.3, "data": "2025-02-20T00:00:00.000Z", "fonte": "Venda de produto" },
+    { "valor": 200.0, "data": "2025-03-01T00:00:00.000Z", "fonte": "Investimento" }
+]
