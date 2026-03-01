@@ -32,6 +32,7 @@ export default function TextInput({
                 placeholder={placeholder}
                 value={value}
                 onChange={handleChange}
+                onClick={handleChange}
                 type={type}
             />
             <p className={styles.error}>

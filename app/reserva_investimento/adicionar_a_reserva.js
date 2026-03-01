@@ -6,7 +6,9 @@ import styles from "@/app/reserva_investimento/adicionar_a_reservar.module.css"
 
 import TextInput from "./components/TextInput"
 import Button from "./components/Button"
+import { validar } from "./vaidarFormulario"
 import { validarValor, validarString, validarData } from "@/utils/validarCampos"
+
 
 
 export default function AdicionarAReserva() {
@@ -16,6 +18,11 @@ export default function AdicionarAReserva() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+
+        if(! validar(valor, data, fonte)) {
+            alert("Preencha os campos corretamente");
+            return;
+        } 
 
         await fetch("/api/aportes", {
             method: "POST",

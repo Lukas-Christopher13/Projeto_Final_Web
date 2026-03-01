@@ -54,3 +54,4 @@ export function validarData(novoValor, setError) {
 
     setError(error)
 }
+
