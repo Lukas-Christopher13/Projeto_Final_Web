@@ -1,13 +1,22 @@
+"use client"
+
 import styles  from "@/app/reserva_investimento/historico.module.css"
 import ExportarHistoricoButton from "./components/ExportarHistoricoButton"
+import { useEffect, useState } from "react"
 
-const reservas = [
-    { id: 1, fonte: "Salário", valor: 1200, data: "01/02/2026" },
-    { id: 2, fonte: "Venda Item 13", valor: 350, data: "10/02/2026" },
-    { id: 3, fonte: "Freelance", valor: 800, data: "15/02/2026" }
-  ]
 
 export default function Historico() {
+    const [aports, setAportes] = useState([])
+
+    useEffect(() => {
+        async function getAportes() {
+            const response = await fetch("/api/aportes")
+            const result = await response.json()
+            setAportes(result)
+        }
+        getAportes()
+    }, [])
+
     return (
         <main className={styles.historico}>
 
@@ -26,7 +35,7 @@ export default function Historico() {
                     </tr>
                 </thead>
                 <tbody className={styles.linhas_tabela}>
-                    {reservas.map((reserva) => (
+                    {aports.map((reserva) => (
                     <tr key={reserva.id}>
                         <td>{reserva.fonte}</td>
                         <td>R$ {reserva.valor}</td>

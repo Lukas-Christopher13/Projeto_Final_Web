@@ -2,7 +2,13 @@ import AporteRepository from "../repositories/AporteRepository";
 
 class AporteService {
     async getAllAportes() {
-        return await AporteRepository.findAll();
+        let aportes = await AporteRepository.findAll();
+        aportes.sort((a, b) => new Date(b.data) - new Date(a.data));
+
+        return aportes.map(aporte => {
+            let dataFormatada = new Date(aporte.data).toLocaleDateString("pt-BR")
+            return { id: aporte._id, valor: aporte.valor, data: dataFormatada, fonte: aporte.fonte }
+        })
     }
 
     async create(aporte) {
@@ -19,9 +25,7 @@ class AporteService {
             aporte.valor = aporte.valor + acumulador;
             acumulador = aporte.valor;
 
-            let data =  new Date(aporte.data).toLocaleDateString("pt-BR", {
-                timeZone: "America/Sao_Paulo"
-            })
+            let data = new Date(aporte.data).toLocaleDateString("pt-BR")
             
             return {data: data, valor: aporte.valor};
         })

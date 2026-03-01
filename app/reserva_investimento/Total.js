@@ -19,7 +19,7 @@ export default function Total() {
             setTotal(result.valorTotal)
         }
         getTotal()
-    });
+    }, []);
 
     return(
         <main className={styles.total}>
