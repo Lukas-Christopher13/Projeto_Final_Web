@@ -1,3 +1,4 @@
+import * as XLSX from "xlsx"
 import AporteRepository from "../repositories/AporteRepository";
 
 class AporteService {
@@ -44,6 +45,26 @@ class AporteService {
             
         return {valorTotal: valor}
     }
-}
 
+    async exportarHistorico() {
+        let aportes = await AporteRepository.findAll()
+        aportes.sort((a, b) => new Date(a.data) - new Date(b.data))
+        
+        aportes = aportes.map(aporte => ({
+            Fonte: aporte.fonte,
+            Data: new Date(aporte.data).toLocaleDateString("pt-BR"),
+            Valor: aporte.valor,
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(aportes);
+        const workbook = XLSX.utils.book_new();
+
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Aportes");
+
+        return XLSX.write(workbook, {
+            type: "buffer",
+            bookType: "xlsx"
+        })
+    }
+}
 export default new AporteService();
