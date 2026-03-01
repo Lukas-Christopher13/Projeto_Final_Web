@@ -5,6 +5,10 @@ class AporteService {
         return await AporteRepository.findAll();
     }
 
+    async create(aporte) {
+        return await AporteRepository.create(aporte)
+    }
+
     async getTotalAcumulado() {
         let aportes = await AporteRepository.findAll();
         aportes.sort((a, b) => new Date(a.data) - new Date(b.data))

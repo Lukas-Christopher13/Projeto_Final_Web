@@ -16,8 +16,6 @@ export default function TextInput({
     const [error, setError] = useState("")
 
     function handleChange(e) {
-        e.preventDefault()
-
         const novoValor = e.target.value;
         onChange(novoValor)
         validar(novoValor, setError)
@@ -32,7 +30,6 @@ export default function TextInput({
                 placeholder={placeholder}
                 value={value}
                 onChange={handleChange}
-                onClick={handleChange}
                 type={type}
             />
             <p className={styles.error}>
