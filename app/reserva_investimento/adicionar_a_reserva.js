@@ -10,16 +10,37 @@ import { validarValor, validarString, validarData } from "@/utils/validarCampos"
 
 
 export default function AdicionarAReserva() {
-
-    const [valor, setValor] = useState();
-    const [data, setData] = useState();
+    const [valor, setValor] = useState("");
+    const [data, setData] = useState("");
     const [fonte, setFonte] = useState("");
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        await fetch("/api/aportes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                valor: Number(valor),
+                data,
+                fonte
+            })
+        });
+
+        alert("Aporte criado");
+
+        setValor("");
+        setData("");
+        setFonte("");
+    }
 
     return (
         <main className={styles.reserva}>
             <p className={styles.titulo}>Adicionar à Reserva</p>
 
-            <form className={styles.form} >
+            <form className={styles.form} onSubmit={handleSubmit} >
                 <div className={styles.inputs}>
                     <TextInput 
                         id="valor" 
