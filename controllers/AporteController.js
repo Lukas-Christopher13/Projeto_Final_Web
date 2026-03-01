@@ -10,6 +10,14 @@ class AporteController {
 
         return NextResponse.json(aportes)
     }
+
+    async totalAcumulado() {
+        await connectDB();
+
+        const total = await AporteService.getTotalAcumulado()
+
+        return NextResponse.json(total)
+    }
 }
 
 export default new AporteController();

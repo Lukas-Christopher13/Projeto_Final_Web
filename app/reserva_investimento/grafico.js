@@ -20,7 +20,7 @@ export default function Grafico() {
 
     useEffect(() => {
         async function getDados() {
-            const response = await fetch("http://localhost:3000/api/aportes");
+            const response = await fetch("http://localhost:3000/api/aportes/total_acumulado");
             const data = await response.json();
             setDados(data)
         }
