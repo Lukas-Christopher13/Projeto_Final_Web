@@ -1,15 +1,8 @@
-import { z } from "zod"
-
 import { NextResponse } from "next/server";
-import { connectDB } from "../utils/mongodb"
+import { connectDB } from "../utils/mongodb";
+import { aporteSchema } from "@/schemas/aporte.schema";
+
 import AporteService from "../services/AporteService";
-
-const aporteSchema = z.object({
-    valor: z.number().positive("O valor deve ser positivo!"),
-    data: z.string().nonempty("Data obrigatória!"),
-    fonte: z.string().min(3, "Fonte deve ter no minimo 3 caracteres")
-})
-
 
 class AporteController {
     async list() {

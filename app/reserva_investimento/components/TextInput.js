@@ -1,40 +1,30 @@
 "use client"
 
+import React from "react";
 import styles from "@/app/reserva_investimento/components/TextInput.module.css"
-import { useState } from "react"
 
-export default function TextInput({
-    id,
-    label,
-    placeholder,
-    value,
-    onChange,
-    validar,
-    type = "text"
-}) {
 
-    const [error, setError] = useState("")
+const TextInput = React.forwardRef(
+    ({ id, label, placeholder, type = "text", ...rest }, ref) => {
+        return (
+            <div className={styles.text_input}>
+                <label className={styles.label} htmlFor={id}>
+                    {label}
+                </label>
 
-    function handleChange(e) {
-        const novoValor = e.target.value;
-        onChange(novoValor)
-        validar(novoValor, setError)
+                <input
+                    ref={ref}
+                    id={id}
+                    className={styles.input}
+                    placeholder={placeholder}
+                    type={type}
+                    {...rest}                
+                />
+            </div>
+        );
     }
+);
 
-    return(
-        <div className={styles.text_input}>
-            <label className={styles.label} htmlFor={id}>{label}</label>
-            <input 
-                className={styles.input} 
-                id={id} 
-                placeholder={placeholder}
-                value={value}
-                onChange={handleChange}
-                type={type}
-            />
-            <p className={styles.error}>
-                {error ? error : ""}
-            </p>
-        </div>
-    )
-}
+TextInput.displayName = "TextInput";
+
+export default TextInput;
