@@ -11,31 +11,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { aporteSchema } from "@/schemas/aporte.schema"
 
 
-async function handleSubmfit(e) {
-    if(!validar(valor, data, fonte)) {
-        alert("Preencha os campos corretamente");
-        return;
-    } 
-
-    await fetch("/api/aportes", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            valor: Number(valor),
-            data,
-            fonte
-        })
-    });
-
-    alert("Aporte criado");
-
-    setValor("");
-    setData("");
-    setFonte("");
-}
-
 
 export default function AdicionarAReserva() {
     const { register, handleSubmit, formState: { errors }} = useForm({
@@ -43,8 +18,22 @@ export default function AdicionarAReserva() {
         mode: "onBlur",
     })
 
-    function onSubmit(data) {
-        console.log(data)
+    async function  onSubmit(data) {
+        const response = await fetch("/api/aportes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error);
+        }
+
+        alert("Aporte salvo com sucesso!");
     }
 
     return (
@@ -58,6 +47,7 @@ export default function AdicionarAReserva() {
                             {...register("valor")}
                             id={"valor"}
                             label="Valor (R$)" 
+                            type="number"
                             placeholder="R$ 0,00"
                         />
                         {errors.valor && <p className={styles.error} >{errors.valor.message}</p>}
