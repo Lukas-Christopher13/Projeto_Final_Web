@@ -30,6 +30,8 @@ export default function Historico() {
             method: "DELETE",
         })
 
+        setAportes(aports.filter(aporte => aporte.id !== aporteId))
+        
         fecharModal()
     }
 
