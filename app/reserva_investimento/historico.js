@@ -3,10 +3,17 @@
 import styles  from "@/app/reserva_investimento/historico.module.css"
 import ExportarHistoricoButton from "./components/ExportarHistoricoButton"
 import { useEffect, useState } from "react"
+import { FaPen, FaTrash } from "react-icons/fa"
+import Modal from "./components/Modal"
 
 
 export default function Historico() {
     const [aports, setAportes] = useState([])
+    const [isOpen, setIsOpen] = useState(false)
+
+    async function excluirAporte(params) {
+        setIsOpen(false)
+    }
 
     useEffect(() => {
         async function getAportes() {
@@ -24,7 +31,17 @@ export default function Historico() {
                 <p className={styles.titulo}>Histórico de Reservas</p>
                 <ExportarHistoricoButton />
             </header>
-
+            
+            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} >
+                <div className={styles.excluir}>
+                    <p>Realmente deseja excluir o aporte?</p>
+                    <div className={styles.botoes_excluir}>
+                        <button className={styles.botao_cancelar} onClick={() => setIsOpen(false)} >Cancelar</button>
+                        <button className={styles.botao_excluir} onClick={() => excluirAporte()} >Excluir</button>
+                    </div>
+                </div>
+            </Modal>
+                            
             <table className={styles.tabela}>
                 <thead className={styles.cabesalho_tabela}>
                     <tr>
@@ -40,7 +57,10 @@ export default function Historico() {
                         <td>{reserva.fonte}</td>
                         <td>R$ {reserva.valor}</td>
                         <td>{reserva.data}</td>
-                        <td>Ação</td>
+                        <td>
+                            <button><FaPen size={16}/></button>
+                            <button onClick={() => setIsOpen(true)}><FaTrash size={16}/></button>
+                        </td>
                     </tr>
                     ))}
                 </tbody>
