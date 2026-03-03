@@ -13,7 +13,11 @@ class AporteService {
     }
 
     async create(aporte) {
-        return await AporteRepository.create(aporte)
+        return await AporteRepository.create(aporte);
+    }
+
+    async findByIdAndDelete(id) {
+        return await AporteRepository.findByIdAndDelete(id);
     }
 
     async getTotalAcumulado() {

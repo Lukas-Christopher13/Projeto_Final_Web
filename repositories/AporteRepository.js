@@ -8,6 +8,10 @@ class AporteRepository {
     async create(aporte) {
         return await Aporte.create(aporte)
     }
+
+    async findByIdAndDelete(id) {
+        return await Aporte.findByIdAndDelete(id)
+    }
 }
 
 export default new AporteRepository();

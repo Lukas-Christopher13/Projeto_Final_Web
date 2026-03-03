@@ -9,10 +9,28 @@ import Modal from "./components/Modal"
 
 export default function Historico() {
     const [aports, setAportes] = useState([])
+    const [aporteId, setAporteId] = useState(null)
     const [isOpen, setIsOpen] = useState(false)
 
-    async function excluirAporte(params) {
+   
+    function abrirModal(id) {
+        setAporteId(id)
+        setIsOpen(true)
+    }
+
+    function fecharModal() {
+        setAporteId(null)
         setIsOpen(false)
+    }
+
+    async function excluirAporte() {
+        if (!aporteId) return;
+
+        await fetch(`/api/aportes/${aporteId}`, {
+            method: "DELETE",
+        })
+
+        fecharModal()
     }
 
     useEffect(() => {
@@ -32,11 +50,11 @@ export default function Historico() {
                 <ExportarHistoricoButton />
             </header>
             
-            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} >
+            <Modal isOpen={isOpen} onClose={() => fecharModal()} >
                 <div className={styles.excluir}>
                     <p>Realmente deseja excluir o aporte?</p>
                     <div className={styles.botoes_excluir}>
-                        <button className={styles.botao_cancelar} onClick={() => setIsOpen(false)} >Cancelar</button>
+                        <button className={styles.botao_cancelar} onClick={() => fecharModal()} >Cancelar</button>
                         <button className={styles.botao_excluir} onClick={() => excluirAporte()} >Excluir</button>
                     </div>
                 </div>
@@ -59,7 +77,7 @@ export default function Historico() {
                         <td>{reserva.data}</td>
                         <td>
                             <button><FaPen size={16}/></button>
-                            <button onClick={() => setIsOpen(true)}><FaTrash size={16}/></button>
+                            <button onClick={() => abrirModal(reserva.id)}><FaTrash size={16}/></button>
                         </td>
                     </tr>
                     ))}

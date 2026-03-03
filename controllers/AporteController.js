@@ -30,6 +30,32 @@ class AporteController {
         }
     }
 
+    async delete(id) {
+        await connectDB();
+
+        try {
+            const aporte = AporteService.findByIdAndDelete(id)
+
+            if (!aporte) {
+                return NextResponse.json(
+                  { error: "Aporte não encontrado" },
+                  { status: 404 }
+                )
+            }
+        
+            return NextResponse.json(
+                { message: "Aporte deletado com sucesso" },
+                { status: 200 }
+            )
+
+        } catch (error) {
+            return NextResponse.json(
+                { error: "Erro ao deletar aporte" },
+                { status: 500 }
+            )
+        }
+    }
+
     async totalAcumulado() {
         await connectDB();
 
