@@ -16,6 +16,10 @@ class AporteService {
         return await AporteRepository.create(aporte);
     }
 
+    async update(id, body) {
+        return await AporteRepository.update(id, body)
+    }
+
     async findByIdAndDelete(id) {
         return await AporteRepository.findByIdAndDelete(id);
     }

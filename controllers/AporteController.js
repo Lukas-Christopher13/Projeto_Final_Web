@@ -30,6 +30,21 @@ class AporteController {
         }
     }
 
+    async update(id, body) {
+        await connectDB();
+        try {
+            const aporteAtualizado = await AporteService.update(id, body)
+
+            return NextResponse.json(aporteAtualizado)
+
+        } catch (error) {
+            return NextResponse.json(
+                { error: "Erro ao atualizar" },
+                { status: 500 }
+            )
+        }
+    }
+
     async delete(id) {
         await connectDB();
 

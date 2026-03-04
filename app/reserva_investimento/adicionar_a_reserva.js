@@ -5,7 +5,6 @@ import styles from "@/app/reserva_investimento/adicionar_a_reservar.module.css"
 import Button from "./components/Button"
 import TextInput from "./components/TextInput"
 
-import { validar } from "./vaidarFormulario"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { aporteSchema } from "@/schemas/aporte.schema"
@@ -18,7 +17,7 @@ export default function AdicionarAReserva() {
         mode: "onBlur",
     })
 
-    async function  onSubmit(data) {
+    async function onSubmit(data) {
         const response = await fetch("/api/aportes", {
             method: "POST",
             headers: {

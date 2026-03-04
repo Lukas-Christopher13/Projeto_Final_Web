@@ -12,6 +12,10 @@ class AporteRepository {
     async findByIdAndDelete(id) {
         return await Aporte.findByIdAndDelete(id)
     }
+
+    async update(id, body) {
+        return await Aporte.findByIdAndUpdate(id, body, {new: true})
+    }
 }
 
 export default new AporteRepository();

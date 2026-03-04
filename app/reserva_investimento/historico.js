@@ -12,7 +12,7 @@ import { aporteSchema } from "@/schemas/aporte.schema"
 
 
 export default function Historico() {
-    const { register, handleSubmit, formState: { errors }} = useForm({
+    const { register, handleSubmit, reset, formState: { errors }} = useForm({
         resolver: zodResolver(aporteSchema),
         mode: "onBlur",
     })
@@ -32,6 +32,35 @@ export default function Historico() {
         setIsOpen(false)
     }
 
+    function abrirEditModal(aporte) {
+        setAporteId(aporte.id)
+        reset(aporte)
+        setEditModal(true)
+    }
+
+    function fecharEditModal() {
+        setAporteId(null)
+        setEditModal(false)
+    }
+
+    async function atualizarAporte(data) {
+        if (!aporteId) return;
+
+        const response = await fetch(`/api/aportes/${aporteId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+
+        if (!response.ok) {
+            throw new Error("Erro ao atualizar")
+        }
+
+        fecharEditModal();
+    }
+
     async function excluirAporte() {
         if (!aporteId) return;
 
@@ -39,9 +68,8 @@ export default function Historico() {
             method: "DELETE",
         })
 
-        setAportes(aports.filter(aporte => aporte.id !== aporteId))
-        
-        fecharModal()
+        setAportes(aports.filter(aporte => aporte.id !== aporteId));
+        fecharModal();
     }
 
     useEffect(() => {
@@ -72,7 +100,7 @@ export default function Historico() {
             </Modal>
 
             <Modal isOpen={isEditModalOpen} onClose={() => setEditModal(false)}>
-                <form className={styles.atualizar}>
+                <form className={styles.atualizar} onSubmit={handleSubmit(atualizarAporte)}> 
                     <div className={styles.input}>
                         <TextInput 
                             {...register("valor")}
@@ -104,8 +132,8 @@ export default function Historico() {
                     </div>
 
                     <div className={styles.botoes}>
-                        <button className={styles.botao_atualizar}>Atualizar</button>
-                        <button className={styles.botao_cancelar}>Cancelar</button>
+                        <button className={styles.botao_atualizar} type="submit" >Atualizar</button>
+                        <button className={styles.botao_cancelar} onClick={fecharEditModal} >Cancelar</button>
                     </div>
                 </form>
             </Modal>
@@ -120,14 +148,14 @@ export default function Historico() {
                     </tr>
                 </thead>
                 <tbody className={styles.linhas_tabela}>
-                    {aports.map((reserva) => (
-                    <tr key={reserva.id}>
-                        <td>{reserva.fonte}</td>
-                        <td>R$ {reserva.valor}</td>
-                        <td>{reserva.data}</td>
+                    {aports.map((aporte) => (
+                    <tr key={aporte.id}>
+                        <td>{aporte.fonte}</td>
+                        <td>R$ {aporte.valor}</td>
+                        <td>{aporte.data}</td>
                         <td>
-                            <button onClick={() => setEditModal(true)}><FaPen size={16}/></button>
-                            <button onClick={() => abrirModal(reserva.id)}><FaTrash size={16}/></button>
+                            <button onClick={() => abrirEditModal(aporte)}><FaPen size={16}/></button>
+                            <button onClick={() => abrirModal(aporte.id)}><FaTrash size={16}/></button>
                         </td>
                     </tr>
                     ))}
