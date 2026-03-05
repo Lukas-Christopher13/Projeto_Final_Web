@@ -4,6 +4,16 @@
     flex-direction: column;
 }
 
+.annual_summary h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.annual_summary h2 {
+    color: gray;
+    font-size: 1rem;
+}
+
 .resumo {
     width: 100%;
     display: flex;
@@ -21,7 +31,10 @@
 
     padding-left: 1rem;
     border-radius: 0.5rem;
-    background-color: rgb(1, 200, 1);
+
+    color: rgb(22, 101, 52);
+    background-color: rgba(34, 197, 94, 0.35);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .despesa {
@@ -34,7 +47,10 @@
 
     padding-left: 1rem;
     border-radius: 0.5rem;
-    background-color: rgb(140, 1, 1);
+    
+    color: rgb(56, 3, 3);
+    background-color: rgba(239, 68, 68, 0.35);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .saldo {
@@ -47,13 +63,18 @@
 
     padding-left: 1rem;
     border-radius: 0.5rem;
-    background-color: rgb(1, 1, 200);
+
+    color: rgb(30, 58, 138);
+    background-color: rgba(59, 130, 246, 0.35);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-.renda_titulo {
-    
+.titulo {
+    font-size: 14px;
+    font-weight: bold;
 }
 
-.renda_valor {
-
+.valor {
+    font-size: 25px;
+    font-weight: bold;
 }

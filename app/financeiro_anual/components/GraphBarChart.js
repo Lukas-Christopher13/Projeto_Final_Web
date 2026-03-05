@@ -12,7 +12,7 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-import styles from './GrapBarChart.module.css';
+import styles from './GraphBarChart.module.css';
 
 const data = [
   { mes: "Jan", renda: 5000, despesa: 3200 },
@@ -31,7 +31,7 @@ const data = [
 
 export default function GraphBarChart() {
     return (
-        <div className={styles.barChart}>
+        <div className={styles.GraphbarChart}>
             <h1>Rendas vs. Despesas Mensais</h1>
             <div className={styles.graph}>
                 <ResponsiveContainer width="100%" height={350}>

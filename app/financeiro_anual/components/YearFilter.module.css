@@ -6,7 +6,36 @@
 }
 
 .input {
-    width: 100px;
+    width: 70px;
     border: 1px solid gray;
     border-radius: 3px;
+    text-align: center;
+}
+
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+.btnPdf {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    background-color: #16a34a;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btnPdf:hover {
+    background-color: #15803d;
 }
