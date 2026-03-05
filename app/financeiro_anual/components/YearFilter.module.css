@@ -1,0 +1,12 @@
+.year_filter {
+    display: flex;
+    justify-content: flex-end   ;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.input {
+    width: 100px;
+    border: 1px solid gray;
+    border-radius: 3px;
+}

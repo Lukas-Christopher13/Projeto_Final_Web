@@ -5,14 +5,20 @@ import BarChart from './components/BarChart';
 import IncomeDetails from './components/IncomeDetails';
 import CardExpenseDetails from './components/CardExpenseDetails';
 
+import styles from './page.module.css';
+
 export default function FinanceiroAnual() {
     return (
-        <div>
+        <div className={styles.page}>
             <YearFilter />
+
             <AnnualSummary />
+
             <BarChart />
+            
             <CardExpenseDetails />
+          
             <IncomeDetails />
         </div>
     );
-}
+};
