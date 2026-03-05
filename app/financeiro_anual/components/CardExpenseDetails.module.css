@@ -12,6 +12,13 @@
     background-color: white;
 }
 
+.card_expense_details h1 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
 .table {
     width: 100%;
 }
@@ -23,10 +30,16 @@
     justify-content: space-between;
 
     padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem;
     border-bottom: 1px solid gray;
+}
+
+.table_row th:last-child {
+    color: red;
+    font-size: 16;
 }
 
 .table_row:last-child {
     border-bottom: none;
+    padding-bottom: 2rem;
 }
