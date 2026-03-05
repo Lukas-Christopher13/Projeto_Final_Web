@@ -1,0 +1,24 @@
+.card {
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 0.5rem;
+    background-color: blueviolet;
+    padding: 5px 10px 5px 10px;
+}
+
+.card_text{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:baseline;
+    color: white;
+    gap: 10px
+}
+
+.black_bar {
+    height: 10px;
+    background-color: black;
+    border-radius: 5px;
+}

@@ -1,5 +1,5 @@
 import { FaFile } from "react-icons/fa"
-import styles from "@/app/reserva_investimento/components/ExportarHistoricoButton.module.css"
+import styles from "@/app/components/ExportarHistoricoButton.module.css"
 
 export default function ExportarHistoricoButton() {
 

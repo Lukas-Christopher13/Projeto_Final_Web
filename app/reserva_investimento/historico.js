@@ -1,7 +1,7 @@
 "use client"
 
 import styles  from "@/app/reserva_investimento/historico.module.css"
-import ExportarHistoricoButton from "./components/ExportarHistoricoButton"
+import ExportarHistoricoButton from "../components/ExportarHistoricoButton"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { FaPen, FaTrash } from "react-icons/fa"
