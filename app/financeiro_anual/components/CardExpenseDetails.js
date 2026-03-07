@@ -6,14 +6,23 @@ import styles from "./CardExpenseDetails.module.css"
 
 export default function CardExpenseDetails(props) {
     const [gastosPorCartao, setGastosPorCartao] = useState([]);
+    const [gastosBoletoPix, setGastoBoletoPix] = useState(0);
 
     useEffect(() => {
-        async function getGastosPorCartao() {
-            const response = await fetch((`/api/cartoes/despesas_por_cartao/${props.anoAtual}`));
-            const gastos = await response.json();
-            setGastosPorCartao(gastos)
+        async function getGastos() {
+            const cartao = await fetch((`/api/cartoes/despesas_por_cartao/${props.anoAtual}`));
+            const boletoPix = await fetch((`/api/despesas/total/conta_corrente/${props.anoAtual}`));
+
+            const gastos = await cartao.json();
+            const gastoBoletoPix = await boletoPix.json();
+
+            setGastosPorCartao(gastos);
+            setGastoBoletoPix(Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            }).format(gastoBoletoPix));
         }
-        getGastosPorCartao();
+        getGastos();
     }, [props.anoAtual]);
 
     return (
@@ -31,7 +40,7 @@ export default function CardExpenseDetails(props) {
                    
                     <tr className={styles.table_row}>
                         <th>Boleto/Pix</th>
-                        <th><p>R$ 1000,00</p></th>
+                        <th><p>{gastosBoletoPix}</p></th>
                     </tr>
                 </tbody>
             </table>

@@ -182,5 +182,131 @@
         "categoria": "saude",
         "numeroParcelas": 3,
         "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Supermercado",
+        "valor": 245.90,
+        "data": "2023-01-12",
+        "categoria": "alimentacao",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
+    },
+    {
+        "descricao": "Conta de Luz",
+        "valor": 132.45,
+        "data": "2023-01-28",
+        "categoria": "moradia",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
+    },
+    {
+        "descricao": "Internet",
+        "valor": 99.90,
+        "data": "2023-03-05",
+        "categoria": "servicos",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
+    },
+    {
+        "descricao": "Farmácia",
+        "valor": 58.70,
+        "data": "2024-02-11",
+        "categoria": "saude",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
+    },
+    {
+        "descricao": "Gasolina",
+        "valor": 210.00,
+        "data": "2024-02-21",
+        "categoria": "transporte",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
+    },
+    {
+        "descricao": "Restaurante",
+        "valor": 84.50,
+        "data": "2024-07-14",
+        "categoria": "alimentacao",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
+    },
+    {
+        "descricao": "Streaming",
+        "valor": 39.90,
+        "data": "2024-07-22",
+        "categoria": "lazer",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
+    },
+    {
+        "descricao": "Manutenção do carro",
+        "valor": 620.00,
+        "data": "2025-01-09",
+        "categoria": "transporte",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
+    },
+    {
+        "descricao": "Supermercado",
+        "valor": 310.40,
+        "data": "2025-01-23",
+        "categoria": "alimentacao",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
+    },
+    {
+        "descricao": "Academia",
+        "valor": 120.00,
+        "data": "2025-06-03",
+        "categoria": "saude",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
+    },
+    {
+        "descricao": "Cinema",
+        "valor": 45.00,
+        "data": "2025-06-19",
+        "categoria": "lazer",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
+    },
+    {
+        "descricao": "Conta de Água",
+        "valor": 78.30,
+        "data": "2026-02-10",
+        "categoria": "moradia",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
+    },
+    {
+        "descricao": "Uber",
+        "valor": 26.90,
+        "data": "2026-02-18",
+        "categoria": "transporte",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
+    },
+    {
+        "descricao": "Padaria",
+        "valor": 18.50,
+        "data": "2026-09-07",
+        "categoria": "alimentacao",
+        "numeroParcelas": 1,
+        "vinculo": "conta_corrente",
+        "cartao": null
     }
 ]
