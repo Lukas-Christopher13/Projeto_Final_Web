@@ -22,7 +22,7 @@ export default function FinanceiroAnual() {
             
             <CardExpenseDetails anoAtual={ano} />
           
-            <IncomeDetails />
+            <IncomeDetails anoAtual={ano} />
         </div>
     );
 };

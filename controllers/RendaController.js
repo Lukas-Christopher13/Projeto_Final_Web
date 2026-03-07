@@ -16,6 +16,20 @@ class RendaController {
             );
         }
     }
+
+    async getRendasPor(ano) {
+        await connectDB();
+
+        try {
+            const rendas = await RendaService.getRendasPor(ano);
+            return NextResponse.json(rendas);
+        } catch (error) {
+            return NextResponse.json(
+                { error: error.message || "Erro ao obter rendas" }, 
+                { status: 500 }
+            );
+        }
+    }
 }
 
 export default new RendaController();

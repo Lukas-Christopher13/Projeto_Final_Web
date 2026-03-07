@@ -16,6 +16,11 @@ class DespesasService {
     
         despesas.forEach(d => meses[new Date(d.data).getMonth()].despesa += d.valor);
         rendas.forEach(r => meses[new Date(r.data).getMonth()].renda += r.valor);
+
+        meses.forEach(m => {
+            m.despesa = Math.round(m.despesa.toFixed(2));
+            m.renda   = Math.round(m.renda.toFixed(2));
+        });
     
         return meses;
     }
