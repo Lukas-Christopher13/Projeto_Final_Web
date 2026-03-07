@@ -4,23 +4,41 @@ import { useEffect, useState } from 'react';
 import styles from './AnnualSummary.module.css';
 
 export default function AnnualSummary(props) {
-    const despesaInicial = Intl.NumberFormat("pt-BR", {
+    const valorInicial = Intl.NumberFormat("pt-BR", {
         style: "currency",
         currency: "BRL"
     }).format(0)
 
-    const [totalDespesas, setTotalDespesas] = useState(despesaInicial);
+    const [totalRendas, setTotalRendas] = useState(valorInicial);
+    const [totalDespesas, setTotalDespesas] = useState(valorInicial);
+    const [saldoFinal, setSaldoFinal] = useState(valorInicial);
 
     useEffect(() => {
-        async function fetchTotalDespesas() {
-            const response = await fetch(`/api/despesas/total/${props.anoAtual}`);
-            const data = await response.json();
+        async function fetchTotais() {
+            const rendaTotal = await fetch(`/api/rendas/total/${props.anoAtual}`);
+            const despesaTotal = await fetch(`/api/despesas/total/${props.anoAtual}`);
+
+
+            const renda = await rendaTotal.json();
+            const despesas = await despesaTotal.json();
+            const saldo = renda - despesas;
+
+            setTotalRendas(Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            }).format(renda));
+
             setTotalDespesas(Intl.NumberFormat("pt-BR", {
                 style: "currency",
                 currency: "BRL"
-            }).format(data));
+            }).format(despesas));
+
+            setSaldoFinal(Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            }).format(saldo));
         }
-        fetchTotalDespesas();
+        fetchTotais();
     }, [props.anoAtual]);
         
     return (
@@ -32,7 +50,7 @@ export default function AnnualSummary(props) {
 
                 <div className={styles.renda}>
                     <p className={styles.titulo}>Total de Rendas do Ano </p>
-                    <p className={styles.valor}> R$ 1000,00</p>
+                    <p className={styles.valor}>{totalRendas}</p>
                 </div>
 
                 <div className={styles.despesa}>
@@ -42,7 +60,7 @@ export default function AnnualSummary(props) {
 
                 <div className={styles.saldo}>
                     <p className={styles.titulo}>Saldo Final do Ano</p>
-                    <p className={styles.valor}> R$ 1000,00</p>
+                    <p className={styles.valor}>{saldoFinal}</p>
                 </div>
 
             </div>

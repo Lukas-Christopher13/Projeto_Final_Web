@@ -3,6 +3,7 @@ import Aporte from "./models/Aporte.js"
 import Cartao from "./models/Cartao.js"
 import Despesa from "./models/Despesa.js"
 import { connectDB } from "./utils/mongodb.js";
+import Renda from "./models/Renda.js";
 
 async function seed() {
     try {
@@ -15,14 +16,25 @@ async function seed() {
         await Aporte.deleteMany({});
         await Aporte.insertMany(dados);
 
+        await carregarRendas();
         await carragarCartoesEDespesas();
-
+        
         console.log("Seed executado!")
         process.exit();
     } catch (error) {
         console.error(error)
         process.exit(1)
     }
+}
+
+async function carregarRendas() {
+    await Renda.deleteMany({});
+
+    const rendasData = JSON.parse(
+        fs.readFileSync("./seeds/rendas.seed.json", "utf-8")
+    );
+    
+    await Renda.insertMany(rendasData);
 }
 
 async function carragarCartoesEDespesas() {
