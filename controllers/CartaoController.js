@@ -3,16 +3,20 @@ import { connectDB } from "../utils/mongodb";
 import CartaoService from "@/services/CartaoService";
 
 class CartaoController {
-    async despesasPorCartao() {
+    async despesasPorCartao(ano = null) {
         await connectDB();
 
         try {
-            const gastosPorCartao = await CartaoService.despesasPorCartao();
+            if (ano) {
+                let gastosPorCartao = await CartaoService.despesasPorCartao(ano);
+                return NextResponse.json(gastosPorCartao)
+            }
 
+            let gastosPorCartao = await CartaoService.despesasPorCartao();
             return NextResponse.json(gastosPorCartao)
         } catch (error) {
             return NextResponse.json(
-                { error: "Erro ao obter gastos por cartão" },
+                { error: error.message || "Erro ao obter despesas por cartão" },
                 { status: 500 }
             )
         }

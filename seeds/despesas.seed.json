@@ -1,66 +1,186 @@
 [
     {
-      "descricao": "Supermercado",
-      "valor": 320.50,
-      "data": "2026-01-02T00:00:00.000Z",
-      "categoria": "alimentacao",
-      "numeroParcelas": 1,
-      "vinculo": "cartao_credito"
+        "descricao": "Supermercado",
+        "valor": 320.50,
+        "data": "2026-01-02T00:00:00.000Z",
+        "categoria": "alimentacao",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
     },
     {
-      "descricao": "Assinatura Netflix",
-      "valor": 39.90,
-      "data": "2026-02-03T00:00:00.000Z",
-      "categoria": "lazer",
-      "numeroParcelas": 1,
-      "vinculo": "cartao_credito"
+        "descricao": "Assinatura Netflix",
+        "valor": 39.90,
+        "data": "2026-02-03T00:00:00.000Z",
+        "categoria": "lazer",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
     },
     {
-      "descricao": "Combustível",
-      "valor": 150.00,
-      "data": "2026-03-04T00:00:00.000Z",
-      "categoria": "transporte",
-      "numeroParcelas": 1,
-      "vinculo": "cartao_credito"
+        "descricao": "Combustível",
+        "valor": 150.00,
+        "data": "2026-03-04T00:00:00.000Z",
+        "categoria": "transporte",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
     },
     {
-      "descricao": "Notebook Dell",
-      "valor": 4500.00,
-      "data": "2026-04-05T00:00:00.000Z",
-      "categoria": "educacao",
-      "numeroParcelas": 10,
-      "vinculo": "cartao_credito"
+        "descricao": "Notebook Dell",
+        "valor": 4500.00,
+        "data": "2026-04-05T00:00:00.000Z",
+        "categoria": "educacao",
+        "numeroParcelas": 10,
+        "vinculo": "cartao_credito"
     },
     {
-      "descricao": "Farmácia",
-      "valor": 89.75,
-      "data": "2026-05-05T00:00:00.000Z",
-      "categoria": "saude",
-      "numeroParcelas": 1,
-      "vinculo": "cartao_credito"
+        "descricao": "Farmácia",
+        "valor": 89.75,
+        "data": "2026-05-05T00:00:00.000Z",
+        "categoria": "saude",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
     },
     {
-      "descricao": "Jantar restaurante",
-      "valor": 120.00,
-      "data": "2026-06-06T00:00:00.000Z",
-      "categoria": "lazer",
-      "numeroParcelas": 1,
-      "vinculo": "cartao_credito"
+        "descricao": "Jantar restaurante",
+        "valor": 120.00,
+        "data": "2026-06-06T00:00:00.000Z",
+        "categoria": "lazer",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
     },
     {
-      "descricao": "Internet residencial",
-      "valor": 99.90,
-      "data": "2026-07-06T00:00:00.000Z",
-      "categoria": "moradia",
-      "numeroParcelas": 1,
-      "vinculo": "cartao_credito"
+        "descricao": "Internet residencial",
+        "valor": 99.90,
+        "data": "2026-07-06T00:00:00.000Z",
+        "categoria": "moradia",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
     },
     {
-      "descricao": "Curso online",
-      "valor": 600.00,
-      "data": "2026-08-07T00:00:00.000Z",
-      "categoria": "educacao",
-      "numeroParcelas": 6,
-      "vinculo": "cartao_credito"
+        "descricao": "Curso online",
+        "valor": 600.00,
+        "data": "2026-08-07T00:00:00.000Z",
+        "categoria": "educacao",
+        "numeroParcelas": 6,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Supermercado",
+        "valor": 280.40,
+        "data": "2025-01-03T00:00:00.000Z",
+        "categoria": "alimentacao",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Spotify",
+        "valor": 21.90,
+        "data": "2025-02-05T00:00:00.000Z",
+        "categoria": "lazer",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Combustível",
+        "valor": 170.00,
+        "data": "2025-03-08T00:00:00.000Z",
+        "categoria": "transporte",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Smartphone Samsung",
+        "valor": 3200.00,
+        "data": "2025-04-10T00:00:00.000Z",
+        "categoria": "tecnologia",
+        "numeroParcelas": 8,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Farmácia",
+        "valor": 65.30,
+        "data": "2025-05-11T00:00:00.000Z",
+        "categoria": "saude",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Padaria",
+        "valor": 45.50,
+        "data": "2024-01-04T00:00:00.000Z",
+        "categoria": "alimentacao",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Cinema",
+        "valor": 70.00,
+        "data": "2024-02-07T00:00:00.000Z",
+        "categoria": "lazer",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Uber",
+        "valor": 38.90,
+        "data": "2024-03-10T00:00:00.000Z",
+        "categoria": "transporte",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "TV 4K",
+        "valor": 2800.00,
+        "data": "2024-04-15T00:00:00.000Z",
+        "categoria": "tecnologia",
+        "numeroParcelas": 10,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Consulta médica",
+        "valor": 200.00,
+        "data": "2024-05-18T00:00:00.000Z",
+        "categoria": "saude",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Mercado mensal",
+        "valor": 310.00,
+        "data": "2023-01-06T00:00:00.000Z",
+        "categoria": "alimentacao",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Amazon compra",
+        "valor": 120.00,
+        "data": "2023-02-09T00:00:00.000Z",
+        "categoria": "compras",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Gasolina",
+        "valor": 140.00,
+        "data": "2023-03-12T00:00:00.000Z",
+        "categoria": "transporte",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Curso Udemy",
+        "valor": 199.90,
+        "data": "2023-04-20T00:00:00.000Z",
+        "categoria": "educacao",
+        "numeroParcelas": 1,
+        "vinculo": "cartao_credito"
+    },
+    {
+        "descricao": "Óculos",
+        "valor": 450.00,
+        "data": "2023-05-22T00:00:00.000Z",
+        "categoria": "saude",
+        "numeroParcelas": 3,
+        "vinculo": "cartao_credito"
     }
 ]

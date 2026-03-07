@@ -3,9 +3,7 @@
 import { FaFilePdf } from "react-icons/fa";
 import styles from './YearFilter.module.css';
 
-export default function YearFilter() {
-    const anoAtual = new Date().getFullYear();
-
+export default function YearFilter(props) {
     return (
         <div className={styles.year_filter}>
             <input 
@@ -14,7 +12,8 @@ export default function YearFilter() {
                 min="1900" 
                 max="2100" 
                 step="1" 
-                defaultValue={anoAtual} />
+                defaultValue={props.anoAtual}
+                onChange={(e) => props.setAno(e.target.value)} />
             <button className={styles.btnPdf}>
                 <FaFilePdf size={18} />
                 Exportar PDF

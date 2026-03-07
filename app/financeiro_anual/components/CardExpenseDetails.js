@@ -4,17 +4,17 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import styles from "./CardExpenseDetails.module.css"
 
-export default function CardExpenseDetails() {
+export default function CardExpenseDetails(props) {
     const [gastosPorCartao, setGastosPorCartao] = useState([]);
 
     useEffect(() => {
         async function getGastosPorCartao() {
-            const response = await fetch("/api/cartoes/despesas_por_cartao");
+            const response = await fetch((`/api/cartoes/despesas_por_cartao/${props.anoAtual}`));
             const gastos = await response.json();
             setGastosPorCartao(gastos)
         }
         getGastosPorCartao();
-    }, [])
+    }, [props.anoAtual]);
 
     return (
         <div className={styles.card_expense_details}>

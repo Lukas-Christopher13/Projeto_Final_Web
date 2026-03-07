@@ -1,10 +1,13 @@
 import CartaoRepository from "@/repositories/CartaoRepository"
 
 class CartaoService {
-    async despesasPorCartao() {
-        const cartaoDespesas = await CartaoRepository.getCartaoDespesas();
+    async despesasPorCartao(ano=null) {
+        let cartaoDespesas;
 
-        return cartaoDespesas.map(cartao => {
+        if (ano) cartaoDespesas = await CartaoRepository.getCartaoDespesasPorAno(ano);
+        else cartaoDespesas = await CartaoRepository.getCartaoDespesas(); 
+
+        const despesasPorCartao = cartaoDespesas.map(cartao => {
             const totalDespesas = cartao.despesas.reduce((total, despesa) => total + despesa.valor, 0);
             return {
                 id: cartao._id,
@@ -12,6 +15,8 @@ class CartaoService {
                 total: totalDespesas
             };
         });
+
+        return despesasPorCartao.sort(a => a.total).reverse();
     };
 }
 
