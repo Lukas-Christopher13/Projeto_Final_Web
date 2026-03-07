@@ -13,23 +13,20 @@ import {
 } from "recharts";
 
 import styles from './GraphBarChart.module.css';
+import { useState, useEffect } from "react";
 
-const data = [
-  { mes: "Jan", renda: 5000, despesa: 3200 },
-  { mes: "Fev", renda: 4800, despesa: 3000 },
-  { mes: "Mar", renda: 5200, despesa: 3500 },
-  { mes: "Abr", renda: 5100, despesa: 3300 },
-  { mes: "Mai", renda: 5300, despesa: 3600 },
-  { mes: "Jun", renda: 5500, despesa: 3700 },
-  { mes: "Jul", renda: 5400, despesa: 3900 },
-  { mes: "Ago", renda: 5600, despesa: 4100 },
-  { mes: "Set", renda: 5800, despesa: 4200 },
-  { mes: "Out", renda: 6000, despesa: 4500 },
-  { mes: "Nov", renda: 6200, despesa: 4600 },
-  { mes: "Dez", renda: 6500, despesa: 4800 }
-];
+export default function GraphBarChart(props) {
+    const [data, setData] = useState([])
 
-export default function GraphBarChart() {
+    useEffect(() => {
+        async function getGraphBarChartData() {
+            const response = await fetch((`/api/graph_bar_chart/${props.anoAtual}`));
+            const graphData = await response.json();
+            setData(graphData)
+        }
+        getGraphBarChartData();
+    }, [props.anoAtual]);
+
     return (
         <div className={styles.GraphbarChart}>
             <h1>Rendas vs. Despesas Mensais</h1>

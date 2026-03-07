@@ -18,7 +18,7 @@ export default function FinanceiroAnual() {
 
             <AnnualSummary anoAtual={ano} />
 
-            <GrapBarChart />
+            <GrapBarChart anoAtual={ano} />
             
             <CardExpenseDetails anoAtual={ano} />
           
