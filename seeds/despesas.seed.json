@@ -1,0 +1,66 @@
+[
+    {
+      "descricao": "Supermercado",
+      "valor": 320.50,
+      "data": "2026-01-02T00:00:00.000Z",
+      "categoria": "alimentacao",
+      "numeroParcelas": 1,
+      "vinculo": "cartao_credito"
+    },
+    {
+      "descricao": "Assinatura Netflix",
+      "valor": 39.90,
+      "data": "2026-02-03T00:00:00.000Z",
+      "categoria": "lazer",
+      "numeroParcelas": 1,
+      "vinculo": "cartao_credito"
+    },
+    {
+      "descricao": "Combustível",
+      "valor": 150.00,
+      "data": "2026-03-04T00:00:00.000Z",
+      "categoria": "transporte",
+      "numeroParcelas": 1,
+      "vinculo": "cartao_credito"
+    },
+    {
+      "descricao": "Notebook Dell",
+      "valor": 4500.00,
+      "data": "2026-04-05T00:00:00.000Z",
+      "categoria": "educacao",
+      "numeroParcelas": 10,
+      "vinculo": "cartao_credito"
+    },
+    {
+      "descricao": "Farmácia",
+      "valor": 89.75,
+      "data": "2026-05-05T00:00:00.000Z",
+      "categoria": "saude",
+      "numeroParcelas": 1,
+      "vinculo": "cartao_credito"
+    },
+    {
+      "descricao": "Jantar restaurante",
+      "valor": 120.00,
+      "data": "2026-06-06T00:00:00.000Z",
+      "categoria": "lazer",
+      "numeroParcelas": 1,
+      "vinculo": "cartao_credito"
+    },
+    {
+      "descricao": "Internet residencial",
+      "valor": 99.90,
+      "data": "2026-07-06T00:00:00.000Z",
+      "categoria": "moradia",
+      "numeroParcelas": 1,
+      "vinculo": "cartao_credito"
+    },
+    {
+      "descricao": "Curso online",
+      "valor": 600.00,
+      "data": "2026-08-07T00:00:00.000Z",
+      "categoria": "educacao",
+      "numeroParcelas": 6,
+      "vinculo": "cartao_credito"
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "nome": "Nubank",
+        "tipo": "credito",
+        "titular": "Lucas Santana",
+        "ultimos4Digitos": "4821"
+    },
+    {
+        "nome": "Mercado Pago",
+        "tipo": "credito",
+        "titular": "Lucas Santana",
+        "ultimos4Digitos": "4821"
+    },
+    {
+        "nome": "Banco Master",
+        "tipo": "credito",
+        "titular": "Lucas Santana",
+        "ultimos4Digitos": "4821"
+    }
+]
