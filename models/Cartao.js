@@ -29,4 +29,4 @@ const CartaoSchema = new mongoose.Schema({
     timestamps: true
 });
 
-export default mongoose.models.CartaoSchema || mongoose.model("Cartao", CartaoSchema);
+export default mongoose.models.Cartao || mongoose.model("Cartao", CartaoSchema);

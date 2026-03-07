@@ -22,4 +22,4 @@ const RendaSchema = new mongoose.Schema({
 }, {
     timestamps: true
 });
-export default mongoose.models.RendaSchema || mongoose.model("Renda", RendaSchema);
+export default mongoose.models.Renda || mongoose.model("Renda", RendaSchema);
