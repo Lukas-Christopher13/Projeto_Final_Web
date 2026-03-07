@@ -1,6 +1,5 @@
 import CartaoController from "@/controllers/CartaoController";
 
-
 export async function GET(req, { params }) {
   const { ano } = await params;
 

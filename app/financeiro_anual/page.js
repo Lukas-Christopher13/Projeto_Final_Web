@@ -16,7 +16,7 @@ export default function FinanceiroAnual() {
         <div className={styles.page}>
             <YearFilter anoAtual={ano} setAno={setAno} />
 
-            <AnnualSummary />
+            <AnnualSummary anoAtual={ano} />
 
             <GrapBarChart />
             
