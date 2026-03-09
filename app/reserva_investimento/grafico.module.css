@@ -9,7 +9,10 @@
 }
 
 .titulo {
-    font-size: 14;
+    font-size: 18px;
+    font-weight: bold;
+    color: #111827;
+    margin: 1rem;
 }
 
 .grafico {

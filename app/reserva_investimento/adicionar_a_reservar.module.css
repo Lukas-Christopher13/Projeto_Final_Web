@@ -1,5 +1,5 @@
 .reserva {
-    max-height: 250px;
+    max-height: 300px;
 
     border: 1px solid #e5e7eb;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
@@ -11,9 +11,10 @@
 }
 
 .titulo {
-    font-size: 12;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 1rem;
     margin-left: 1rem;
-    margin-right: 1rem;
 }
 
 .form {
@@ -25,7 +26,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-
     margin: 1rem;
 }
 

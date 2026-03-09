@@ -20,25 +20,45 @@
 
 .tabela {
     border: 1px solid #e5e7eb;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 
     background-color: white;
+    overflow: hidden;
+    width: 100%;
 }
 
 .cabesalho_tabela {
-    color: gray;
-    font-size: 12px;
-    background-color: rgb(241, 241, 241);
-    border-bottom: 1px solid #e5e7eb;
+    color: #4b5563;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #f9fafb;
+    border-bottom: 2px solid #e5e7eb;
+    text-transform: uppercase;
 }
 
 .cabesalho_tabela th {
     text-align: left;
+    padding: 0.75rem 1rem;
 }
 
 .linhas_tabela td {
     border-bottom: 1px solid #e5e7eb;
+    padding: 0.75rem 1rem;
+    color: #374151;
+    font-size: 14px;
+}
+
+.linhas_tabela tr:nth-child(even) {
+    background-color: #f3f4f6;
+}
+
+.linhas_tabela tr:hover {
+    background-color: #e5e7eb;
+}
+
+.linhas_tabela .valor {
+    color: #10b981; /* Verde */
 }
 
 .excluir {
@@ -67,35 +87,64 @@
 .botao_cancelar {
     max-width: 10rem;
     color: white;
-    background-color: red;
+    background-color: #ef4444;
     padding: 1rem;
     border-radius: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.botao_cancelar:hover {
+    background-color: #dc2626;
 }
 
 .botao_excluir {
     max-width: 10rem;
     color: white;
-    background-color: green;
+    background-color: #10b981;
     padding: 1rem;
     border-radius: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.botao_excluir:hover {
+    background-color: #059669;
 }
 
 .botao_atualizar {
     max-width: 10rem;
     color: white;
-    background-color: green;
+    background-color: #3b82f6;
     padding: 1rem;
     border-radius: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.botao_atualizar:hover {
+    background-color: #2563eb;
 }
 
 .input {
     width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 14px;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
 }
 
 .error {
     min-height: 18px;
     margin-top: 4px;
 
-    font-size: 12;
-    color: red;
+    font-size: 12px;
+    color: #ef4444;
+}
+
+.acao {
+    text-align: right;
 }

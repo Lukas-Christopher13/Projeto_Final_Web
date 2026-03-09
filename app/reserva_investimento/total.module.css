@@ -11,15 +11,19 @@
     border-radius: 6px;
 
     margin: 1rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
 
     background-color: white;
 }
 
 .titulo{
-    font-size: 12;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .total_guardado {
-    font-size: 20;
+    font-size: 2rem;
+    font-weight: bold;
     color: darkcyan;
 }

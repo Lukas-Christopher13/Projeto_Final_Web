@@ -1,3 +1,10 @@
 .reserva_investimento {
-    background-color: aliceblue;
+    background-color: white;
+}
+
+.titulo {
+    font-size: 2em;
+    font-weight: bold;
+    margin-left: 1rem;
+    margin-bottom: 20px;
 }

@@ -8,8 +8,8 @@ import styles from "@/app/reserva_investimento/page.module.css"
 export default function ReservasInvestimentos() {
     return (
         <main className={styles.reserva_investimento}>
-            <h1>Minhas Reservas</h1>
-
+            <h1 className={styles.titulo}>Minhas Reservas</h1>
+            
             <Grafico></Grafico>
             <Total></Total>
             <AdicionarAReserva></AdicionarAReserva>

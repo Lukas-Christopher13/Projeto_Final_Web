@@ -151,9 +151,9 @@ export default function Historico() {
                     {aports.map((aporte) => (
                     <tr key={aporte.id}>
                         <td>{aporte.fonte}</td>
-                        <td>R$ {aporte.valor}</td>
+                        <td className={styles.valor}>R$ {aporte.valor}</td>
                         <td>{aporte.data}</td>
-                        <td>
+                        <td className={styles.acao}>
                             <button onClick={() => abrirEditModal(aporte)}><FaPen size={16}/></button>
                             <button onClick={() => abrirModal(aporte.id)}><FaTrash size={16}/></button>
                         </td>
