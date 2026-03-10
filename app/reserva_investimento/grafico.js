@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react'
 import styles  from "@/app/reserva_investimento/grafico.module.css"
 
 
-export default function Grafico() {
+export default function Grafico(props) {
     const [dados, setDados] = useState([])
 
     useEffect(() => {
@@ -23,9 +23,10 @@ export default function Grafico() {
             const response = await fetch("/api/aportes/total_acumulado");
             const data = await response.json();
             setDados(data)
+            props.setAportes(props.aportes)
         }
         getDados()
-    }, [])
+    }, [props.aportes, props.setAportes])
     
     return (
         <main className={styles.container}>

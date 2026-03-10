@@ -11,13 +11,12 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { aporteSchema } from "@/schemas/aporte.schema"
 
 
-export default function Historico() {
+export default function Historico(props) {
     const { register, handleSubmit, reset, formState: { errors }} = useForm({
         resolver: zodResolver(aporteSchema),
         mode: "onBlur",
     })
 
-    const [aports, setAportes] = useState([])
     const [aporteId, setAporteId] = useState(null)
     const [isOpen, setIsOpen] = useState(false)
     const [isEditModalOpen, setEditModal] = useState(false)
@@ -58,6 +57,18 @@ export default function Historico() {
             throw new Error("Erro ao atualizar")
         }
 
+        props.setAportes(props.aportes.map(aporte => {
+            if (aporte.id === aporteId) {
+                return {
+                    ...aporte,
+                    valor: data.valor,
+                    fonte: data.fonte,
+                    data: new Date(data.data).toLocaleDateString("pt-BR")
+                }
+            }
+            return aporte
+        }))
+        
         fecharEditModal();
     }
 
@@ -68,7 +79,7 @@ export default function Historico() {
             method: "DELETE",
         })
 
-        setAportes(aports.filter(aporte => aporte.id !== aporteId));
+        props.setAportes(props.aportes.filter(aporte => aporte.id !== aporteId));
         fecharModal();
     }
 
@@ -76,10 +87,10 @@ export default function Historico() {
         async function getAportes() {
             const response = await fetch("/api/aportes")
             const result = await response.json()
-            setAportes(result)
+            props.setAportes(result)
         }
         getAportes()
-    }, [])
+    }, [props.setAportes])
 
     return (
         <main className={styles.historico}>
@@ -148,7 +159,7 @@ export default function Historico() {
                     </tr>
                 </thead>
                 <tbody className={styles.linhas_tabela}>
-                    {aports.map((aporte) => (
+                    {props.aportes.map((aporte) => (
                     <tr key={aporte.id}>
                         <td>{aporte.fonte}</td>
                         <td className={styles.valor}>R$ {aporte.valor}</td>

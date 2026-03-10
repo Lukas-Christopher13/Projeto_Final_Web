@@ -1,4 +1,5 @@
 "use client"
+import crypto from "crypto";
 
 import styles from "@/app/reserva_investimento/adicionar_a_reservar.module.css"
 
@@ -10,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { aporteSchema } from "@/schemas/aporte.schema"
 
 
-export default function AdicionarAReserva() {
+export default function AdicionarAReserva(props) {
     const { register, handleSubmit, formState: { errors }} = useForm({
         resolver: zodResolver(aporteSchema),
         mode: "onBlur",
@@ -31,6 +32,17 @@ export default function AdicionarAReserva() {
             throw new Error(result.error);
         }
 
+        let id = crypto.randomBytes(12).toString("hex");
+        let brDate = new Date(data.data).toLocaleDateString("pt-BR")
+
+        data = {
+            id,
+            valor: data.valor,
+            fonte: data.fonte,
+            data: brDate
+        }
+
+        props.setAportes([...props.aportes, data])
         alert("Aporte salvo com sucesso!");
     }
 
