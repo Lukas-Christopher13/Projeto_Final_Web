@@ -23,6 +23,11 @@ const CartaoSchema = new mongoose.Schema({
         type: String,
         required: true,
         match: /^[0-9]{4}$/
+    },
+
+    cor: {
+        type: String,
+        default: "#6B7280"
     }
 
 }, {
