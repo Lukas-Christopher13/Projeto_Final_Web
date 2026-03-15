@@ -18,6 +18,10 @@ const RendaSchema = new mongoose.Schema({
     data: {
         type: Date,
         required: true
+    },
+    usuarioId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }
 }, {
     timestamps: true

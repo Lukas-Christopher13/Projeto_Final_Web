@@ -9,9 +9,17 @@ export default function IncomeDetails(props) {
 
     useEffect(() => {
         async function getRendas() {
-            const response = await fetch((`/api/rendas/${props.anoAtual}`));
-            const dados = await response.json();
-            setRendas(dados);
+            try {
+                const response = await fetch(`/api/rendas/por-ano/${props.anoAtual}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const dados = await response.json();
+                setRendas(Array.isArray(dados) ? dados : []);
+            } catch (error) {
+                console.error("Erro ao buscar rendas:", error);
+                setRendas([]);
+            }
         }
         getRendas();
     }, [props.anoAtual]);
