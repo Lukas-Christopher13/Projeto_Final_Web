@@ -39,6 +39,11 @@ const DespesaSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Cartao",
         required: false
+    },
+
+    parcelaId: {
+        type: String,
+        required: false
     }
 
 }, {
