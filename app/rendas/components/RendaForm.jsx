@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import styles from "./RendaForm.module.css";
 
 export default function RendaForm({ atualizar }) {
 
@@ -35,27 +36,27 @@ export default function RendaForm({ atualizar }) {
   }
 
   return (
-    <div className="border border-gray-200 rounded-lg p-6 mb-6 bg-white">
+    <div className={styles.formulario}>
 
-      <h2 className="mb-5 text-xl font-bold text-gray-900">
+      <h2 className={styles.titulo}>
         Adicionar Nova Renda
       </h2>
 
-      <form className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4" onSubmit={adicionarRenda}>
+      <form className={styles.grid} onSubmit={adicionarRenda}>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="descricao" className="text-sm font-bold text-gray-900">Descrição</label>
+        <div className={styles.campo}>
+          <label htmlFor="descricao" className={styles.label}>Descrição</label>
           <input
             id="descricao"
             type="text"
             value={descricao}
             onChange={(e) => setDescricao(e.target.value)}
-            className="border border-gray-200 rounded-md px-3 py-2 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={styles.entrada}
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="valor" className="text-sm font-bold text-gray-900">Valor (R$)</label>
+        <div className={styles.campo}>
+          <label htmlFor="valor" className={styles.label}>Valor (R$)</label>
           <input
             id="valor"
             type="number"
@@ -64,17 +65,17 @@ export default function RendaForm({ atualizar }) {
             placeholder="R$ 0,00"
             value={valor}
             onChange={(e) => setValor(e.target.value)}
-            className="border border-gray-200 rounded-md px-3 py-2 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={styles.entrada}
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="tipo" className="text-sm font-bold text-gray-900">Tipo</label>
+        <div className={styles.campo}>
+          <label htmlFor="tipo" className={styles.label}>Tipo</label>
           <select
             id="tipo"
             value={tipo}
             onChange={(e) => setTipo(e.target.value)}
-            className="border border-gray-200 rounded-md px-3 py-2 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-auto"
+            className={styles.select}
           >
             {TIPOS.map((t) => (
               <option key={t} value={t.toLowerCase()}>
@@ -84,28 +85,26 @@ export default function RendaForm({ atualizar }) {
           </select>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="data" className="text-sm font-bold text-gray-900">Data</label>
+        <div className={styles.campo}>
+          <label htmlFor="data" className={styles.label}>Data</label>
           <input
             id="data"
             type="date"
             value={data}
             onChange={(e) => setData(e.target.value)}
-            className="border border-gray-200 rounded-md px-3 py-2 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={styles.entrada}
           />
         </div>
 
-        <div className="col-span-1 md:col-span-2 flex justify-end mt-2">
+        <div className={styles.acoes}>
           <button 
             type="submit"
-            className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-md text-sm transition-colors"
+            className={styles.botaoEnviar}
           >
-            Adicionar Renda
+            Adicionar
           </button>
         </div>
-
       </form>
-
     </div>
   );
 }

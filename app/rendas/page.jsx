@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import RendaForm from "./components/RendaForm";
 import RendaTable from "./components/RendaTable";
 import { FileText } from "lucide-react";
+import styles from "./page.module.css";
 
 const MESES = [
   "janeiro", "fevereiro", "março", "abril", "maio", "junho",
@@ -15,7 +16,6 @@ export default function RendasPage() {
   const [mes, setMes] = useState(new Date().getMonth() + 1);
   const [ano, setAno] = useState(new Date().getFullYear());
 
-  // 1. Memoize a função para estabilizar as props dos filhos
   const carregarRendas = useCallback(async () => {
     try {
       const res = await fetch(`/api/rendas?mes=${mes}&ano=${ano}`);
@@ -27,12 +27,10 @@ export default function RendasPage() {
     }
   }, [mes, ano]);
 
-  // 2. useEffect limpo
   useEffect(() => {
     carregarRendas();
   }, [carregarRendas]);
 
-  // 3. Funções de navegação otimizadas (evitam re-renders duplos)
   function proximoMes() {
     if (mes === 12) {
       setMes(1);
@@ -53,7 +51,6 @@ export default function RendasPage() {
 
   function mesAtual() {
     const hoje = new Date();
-    // Atualiza ambos de uma vez
     setMes(hoje.getMonth() + 1);
     setAno(hoje.getFullYear());
   }
@@ -81,46 +78,52 @@ export default function RendasPage() {
   }
 
   return (
-    <div className="w-full min-h-screen bg-gray-50 flex flex-col">
-      <div className="flex-1 overflow-auto">
-        <div className="p-6">
-          <h1 className="mb-6 text-3xl font-bold text-gray-900">Gerenciar Rendas</h1>
-          <RendaForm atualizar={carregarRendas} />
+    <div className={styles.pagina}>
+      <div className={styles.conteudo}>
+        <div className={styles.container}>
+          <h1 className={styles.titulo}>Gerenciar Rendas</h1>
+          <div className={styles.formulario}>
+            <RendaForm atualizar={carregarRendas} />
+          </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-            <h2 className="text-xl font-semibold text-gray-900">
+          <div className={styles.cabecalho}>
+            <h2 className={styles.subtitulo}>
               Rendas de {MESES[mes - 1]} de {ano}
             </h2>
-            <div className="flex items-center gap-2">
+            <div className={styles.acoes}>
               <button
                 onClick={handleExport}
-                className="flex items-center gap-1.5 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-md text-sm transition-colors"
+                className={styles.botaoExportar}
               >
                 <FileText size={15} />
                 Exportar
               </button>
-              <button
-                onClick={mesAtual}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-md text-sm transition-colors"
-              >
-                Mês Atual
-              </button>
-              <button
-                onClick={mesAnterior}
-                className="border border-gray-200 px-3 py-1.5 rounded-md text-sm hover:bg-gray-100 transition-colors text-gray-900"
-              >
-                Anterior
-              </button>
-              <button
-                onClick={proximoMes}
-                className="border border-gray-200 px-3 py-1.5 rounded-md text-sm hover:bg-gray-100 transition-colors text-gray-900"
-              >
-                Próximo
-              </button>
+              <div className={styles.botoesNavegacao}>
+                <button
+                  onClick={mesAnterior}
+                  className={styles.botaoNav}
+                >
+                  Anterior
+                </button>
+                <button
+                  onClick={mesAtual}
+                  className={`${styles.botaoNav} ${styles.botaoNavAtivo}`}
+                >
+                  Mês Atual
+                </button>
+                <button
+                  onClick={proximoMes}
+                  className={styles.botaoNav}
+                >
+                  Próximo
+                </button>
+              </div>
             </div>
           </div>
 
-          <RendaTable rendas={rendas} atualizar={carregarRendas} />
+          <div className={styles.tabela}>
+            <RendaTable rendas={rendas} atualizar={carregarRendas} />
+          </div>
         </div>
       </div>
     </div>

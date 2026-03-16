@@ -1,56 +1,105 @@
-.navbar {
+.barra {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 16px 40px;
-  border-bottom: 1px solid #e5e5e5;
-  background: white;
+  gap: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #ffffff;
 }
 
 .logo {
-  font-weight: bold;
-  font-size: 18px;
-  color: #6b5cff;
+  color: #2563eb;
+  font-weight: 600;
+  font-size: 1rem;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
 }
 
 .menu {
   display: flex;
-  list-style: none;
-  gap: 24px;
+  align-items: center;
+  gap: 1.25rem;
+  flex: 1;
 }
 
-.menu a {
+.link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease-in-out;
   text-decoration: none;
-  color: #555;
+  color: #4b5563;
+}
+
+.link:hover {
+  color: #1f2937;
+  background-color: #f3f4f6;
+}
+
+.linkAtivo {
+  color: #ffffff;
+  background-color: #4f46e5;
   font-weight: 500;
 }
 
-.menu a:hover {
-  color: #6b5cff;
+.linkAdmin {
+  font-size: 0.875rem;
+  color: #a855f7;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
 }
 
-.active {
-  color: #6b5cff;
-  font-weight: bold;
+.linkAdmin:hover {
+  color: #9333ea;
 }
 
-.actions {
+.linkAdminAtivo {
+  color: #9333ea;
+  font-weight: 500;
+}
+
+.acoes {
   display: flex;
-  gap: 12px;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.dark {
+.botaoTema {
+  padding: 0.375rem;
+  border-radius: 0.375rem;
   background: transparent;
   border: none;
-  font-size: 18px;
   cursor: pointer;
+  color: #4b5563;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.logout {
-  background: #e74c3c;
-  color: white;
+.botaoTema:hover {
+  color: #1f2937;
+  background-color: #f3f4f6;
+}
+
+.botaoSair {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 1rem;
+  background-color: #ef4444;
+  color: #ffffff;
   border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.botaoSair:hover {
+  background-color: #dc2626;
 }

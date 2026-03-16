@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import DespesaForm from "./components/DespesaForm";
 import DespesaTable from "./components/DespesaTable";
 import { FileText } from "lucide-react";
+import styles from "./page.module.css";
 
 const MESES = [
   "janeiro", "fevereiro", "março", "abril", "maio", "junho",
@@ -78,46 +79,52 @@ export default function DespesasPage() {
   }
 
   return (
-    <div className="w-full min-h-screen bg-gray-50 flex flex-col">
-      <div className="flex-1 overflow-auto">
-        <div className="p-6">
-          <h1 className="mb-6 text-3xl font-bold text-gray-900">Gerenciar Despesas</h1>
-          <DespesaForm atualizar={carregarDespesas} />
+    <div className={styles.pagina}>
+      <div className={styles.conteudo}>
+        <div className={styles.container}>
+          <h1 className={styles.titulo}>Gerenciar Despesas</h1>
+          <div className={styles.formulario}>
+            <DespesaForm atualizar={carregarDespesas} />
+          </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-            <h2 className="text-xl font-semibold text-gray-900">
+          <div className={styles.cabecalho}>
+            <h2 className={styles.subtitulo}>
               Despesas de {MESES[mes - 1]} de {ano}
             </h2>
-            <div className="flex items-center gap-2">
+            <div className={styles.acoes}>
               <button
                 onClick={handleExport}
-                className="flex items-center gap-1.5 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-md text-sm transition-colors"
+                className={styles.botaoExportar}
               >
                 <FileText size={15} />
                 Exportar
               </button>
-              <button
-                onClick={mesAtual}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-md text-sm transition-colors"
-              >
-                Mês Atual
-              </button>
-              <button
-                onClick={mesAnterior}
-                className="border border-gray-200 px-3 py-1.5 rounded-md text-sm hover:bg-gray-100 transition-colors text-gray-900"
-              >
-                Anterior
-              </button>
-              <button
-                onClick={proximoMes}
-                className="border border-gray-200 px-3 py-1.5 rounded-md text-sm hover:bg-gray-100 transition-colors text-gray-900"
-              >
-                Próximo
-              </button>
+              <div className={styles.botoesNavegacao}>
+                <button
+                  onClick={mesAnterior}
+                  className={styles.botaoNav}
+                >
+                  Anterior
+                </button>
+                <button
+                  onClick={mesAtual}
+                  className={`${styles.botaoNav} ${styles.botaoNavAtivo}`}
+                >
+                  Mês Atual
+                </button>
+                <button
+                  onClick={proximoMes}
+                  className={styles.botaoNav}
+                >
+                  Próximo
+                </button>
+              </div>
             </div>
           </div>
 
-          <DespesaTable despesas={despesas} atualizar={carregarDespesas} />
+          <div className={styles.tabela}>
+            <DespesaTable despesas={despesas} atualizar={carregarDespesas} />
+          </div>
         </div>
       </div>
     </div>

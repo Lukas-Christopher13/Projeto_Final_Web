@@ -2,30 +2,24 @@
 
 import { useState } from "react";
 import { Pencil, Trash2, FileText } from "lucide-react";
+import styles from "./CartaoList.module.css";
 
 export default function CartaoList({ cartoes, atualizar }) {
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({});
 
   function exportarCartoes() {
-    // Headers do CSV
     const headers = ["NOME", "TIPO", "TITULAR", "ÚLTIMOS 4 DÍGITOS"];
-    
-    // Dados
     const rows = cartoes.map(c => [
       c.nome,
       c.tipo === "credito" ? "Cartão de Crédito" : "Cartão de Débito",
       c.titular,
       c.ultimos4Digitos
     ]);
-
-    // Montar CSV
     const csv = [
       headers.join(","),
       ...rows.map(row => row.map(cell => `"${cell}"`).join(","))
     ].join("\n");
-
-    // Download
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
@@ -80,28 +74,30 @@ export default function CartaoList({ cartoes, atualizar }) {
 
   if (cartoes.length === 0) {
     return (
-      <div className="text-center py-8 text-gray-600">
+      <div className={styles.vazio}>
         Nenhum cartão cadastrado. Adicione um novo!
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-gray-900">Contas Cadastradas</h2>
-        <button 
-          onClick={exportarCartoes}
-          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm font-semibold flex items-center gap-2 transition-colors"
-        >
-          <FileText size={16} />
-          Exportar
-        </button>
+    <div className={styles.lista}>
+      <div className={styles.cabecalho}>
+        <h2 className={styles.titulo}>Contas Cadastradas</h2>
+        <div className={styles.acoes}>
+          <button 
+            onClick={exportarCartoes}
+            className={styles.botaoExportar}
+          >
+            <FileText size={16} />
+            Exportar
+          </button>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className={styles.grid}>
         {cartoes.map((cartao) => (
-          <div key={cartao._id} className="relative overflow-hidden rounded-lg border border-gray-200">
+          <div key={cartao._id} className={styles.cartao}>
             {editingId === cartao._id ? (
               <div className="p-4 bg-gray-50 space-y-3">
                 <input
@@ -110,7 +106,7 @@ export default function CartaoList({ cartoes, atualizar }) {
                   onChange={(e) =>
                     setEditForm((f) => ({ ...f, nome: e.target.value }))
                   }
-                  className="w-full border border-gray-300 rounded px-2 py-1 text-sm bg-white text-gray-900"
+                  className={styles.entrada}
                   placeholder="Nome"
                 />
                 <select
@@ -118,7 +114,7 @@ export default function CartaoList({ cartoes, atualizar }) {
                   onChange={(e) =>
                     setEditForm((f) => ({ ...f, tipo: e.target.value }))
                   }
-                  className="w-full border border-gray-300 rounded px-2 py-1 text-sm bg-white text-gray-900"
+                  className={styles.select}
                 >
                   <option value="credito">Cartão de Crédito</option>
                   <option value="debito">Cartão de Débito</option>
@@ -129,7 +125,7 @@ export default function CartaoList({ cartoes, atualizar }) {
                   onChange={(e) =>
                     setEditForm((f) => ({ ...f, titular: e.target.value }))
                   }
-                  className="w-full border border-gray-300 rounded px-2 py-1 text-sm bg-white text-gray-900"
+                  className={styles.entrada}
                   placeholder="Titular"
                 />
                 <input
@@ -142,7 +138,7 @@ export default function CartaoList({ cartoes, atualizar }) {
                       ultimos4Digitos: e.target.value.replace(/[^0-9]/g, "")
                     }))
                   }
-                  className="w-full border border-gray-300 rounded px-2 py-1 text-sm bg-white text-gray-900"
+                  className={styles.entrada}
                   placeholder="Últimos 4"
                 />
                 <input
@@ -151,18 +147,18 @@ export default function CartaoList({ cartoes, atualizar }) {
                   onChange={(e) =>
                     setEditForm((f) => ({ ...f, cor: e.target.value }))
                   }
-                  className="w-full h-10 border border-gray-300 rounded cursor-pointer"
+                  className={styles.inputCor}
                 />
                 <div className="flex gap-2 pt-2">
                   <button
                     onClick={() => handleEditSave(cartao._id)}
-                    className="flex-1 bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded text-sm font-semibold transition-colors"
+                    className={styles.botaoAzul}
                   >
                     Salvar
                   </button>
                   <button
                     onClick={() => setEditingId(null)}
-                    className="flex-1 border border-gray-300 hover:bg-gray-100 px-2 py-1 rounded text-sm font-semibold text-gray-900 transition-colors"
+                    className={styles.botaoCinza}
                   >
                     Cancelar
                   </button>
@@ -171,35 +167,40 @@ export default function CartaoList({ cartoes, atualizar }) {
             ) : (
               <>
                 <div
-                  className="p-4 text-white"
+                  className={styles.cartaoTopo}
                   style={{ backgroundColor: cartao.cor || "#6B7280" }}
                 >
-                  <div className="text-sm opacity-75 mb-1">
-                    Final • {cartao.ultimos4Digitos}
+                  <div className={styles.cartaoTopoTexto}>
+                    <div className={styles.cartaoNumero}>
+                      Final • {cartao.ultimos4Digitos}
+                    </div>
+                    <div className={styles.cartaoNome}>{cartao.nome}</div>
                   </div>
-                  <div className="text-lg font-bold">{cartao.nome}</div>
+                  <div className={styles.cartaoTopo} />
                 </div>
-                <div className="p-3 bg-gray-50">
-                  <div className="text-xs text-gray-600 mb-2">
+                <div className={styles.cartaoCorpo}>
+                  <div className={styles.cartaoLabel}>
                     {cartao.tipo === "credito" ? "Cartão de Crédito" : "Cartão de Débito"}
                   </div>
-                  <div className="text-sm font-semibold text-gray-900 mb-3">
+                  <div className={styles.cartaoValor}>
                     {cartao.titular}
                   </div>
-                  <div className="flex justify-end gap-2">
+                  <div className={styles.cartaoAcoes}>
                     <button
                       onClick={() => handleEdit(cartao)}
-                      className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded transition-colors"
+                      className={styles.botag}
                       title="Editar"
                     >
                       <Pencil size={16} />
+                      Editar
                     </button>
                     <button
                       onClick={() => deletar(cartao._id)}
-                      className="p-2 text-gray-600 hover:text-red-500 hover:bg-red-50 rounded transition-colors"
+                      className={styles.botao}
                       title="Deletar"
                     >
                       <Trash2 size={16} />
+                      Deletar
                     </button>
                   </div>
                 </div>

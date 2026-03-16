@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
+import styles from "./DespesaTable.module.css";
 
 const CATEGORIAS = [
   "Contas da Casa",
@@ -19,18 +20,18 @@ const VINCULOS = [
   { label: "Cartão de Crédito", value: "cartao_credito" }
 ];
 
-function getCategoryColor(categoria) {
-  const cores = {
-    "Contas da Casa": "bg-yellow-400 text-gray-900",
-    "Alimentação": "bg-green-400 text-gray-900",
-    "Transporte": "bg-blue-400 text-white",
-    "Saúde": "bg-red-400 text-white",
-    "Educação": "bg-purple-400 text-white",
-    "Lazer": "bg-pink-400 text-white",
-    "Compras": "bg-orange-400 text-white",
-    "Outros": "bg-gray-400 text-white"
+function getBothierClassesBadge(categoria) {
+  const badges = {
+    "Contas da Casa": styles.badgeCasas,
+    "Alimentação": styles.badgeAlimentacao,
+    "Transporte": styles.badgeTransporte,
+    "Saúde": styles.badgeSaude,
+    "Educação": styles.badgeEducacao,
+    "Lazer": styles.badgeLazer,
+    "Compras": styles.badgeCompras,
+    "Outros": styles.badgeOutros
   };
-  return cores[categoria] || "bg-gray-300 text-gray-900";
+  return badges[categoria] || styles.badgeOutros;
 }
 
 function formatCurrency(value) {
@@ -92,8 +93,8 @@ export default function DespesaTable({ despesas, atualizar }) {
 
   if (despesas.length === 0) {
     return (
-      <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
-        <div className="text-center py-8 text-gray-600 text-sm">
+      <div className={styles.vazio}>
+        <div className={styles.vazioDados}>
           Nenhuma despesa encontrada para este período.
         </div>
       </div>
@@ -101,26 +102,26 @@ export default function DespesaTable({ despesas, atualizar }) {
   }
 
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
-      <table className="w-full">
-        <thead>
-          <tr className="border-b border-gray-200 bg-gray-50">
-            <th className="text-left px-4 py-3 text-xs text-gray-600 tracking-wider uppercase font-semibold">
+    <div className={styles.tabela}>
+      <table className={styles.tabelaElemento}>
+        <thead className={styles.cabecalho}>
+          <tr>
+            <th className={styles.coluna}>
               Descrição
             </th>
-            <th className="text-left px-4 py-3 text-xs text-gray-600 tracking-wider uppercase font-semibold">
+            <th className={styles.coluna}>
               Valor
             </th>
-            <th className="text-left px-4 py-3 text-xs text-gray-600 tracking-wider uppercase font-semibold">
+            <th className={styles.coluna}>
               Categoria
             </th>
-            <th className="text-left px-4 py-3 text-xs text-gray-600 tracking-wider uppercase font-semibold">
+            <th className={styles.coluna}>
               Conta
             </th>
-            <th className="text-left px-4 py-3 text-xs text-gray-600 tracking-wider uppercase font-semibold">
+            <th className={styles.coluna}>
               Data Venc.
             </th>
-            <th className="text-right px-4 py-3 text-xs text-gray-600 tracking-wider uppercase font-semibold">
+            <th className={`${styles.coluna} ${styles.colunaAcoes}`}>
               Ações
             </th>
           </tr>
@@ -129,21 +130,21 @@ export default function DespesaTable({ despesas, atualizar }) {
           {despesas.map((despesa) => (
             <tr
               key={despesa._id}
-              className="border-b border-gray-200 last:border-0 hover:bg-gray-50 transition-colors"
+              className={styles.linha}
             >
               {editingId === despesa._id ? (
                 <>
-                  <td className="px-4 py-3">
+                  <td className={styles.celula}>
                     <input
                       type="text"
                       value={editForm.descricao ?? ""}
                       onChange={(e) =>
                         setEditForm((f) => ({ ...f, descricao: e.target.value }))
                       }
-                      className="border border-gray-200 rounded px-2 py-1 text-sm bg-white text-gray-900 w-full"
+                      className={styles.entrada}
                     />
                   </td>
-                  <td className="px-4 py-3">
+                  <td className={styles.celula}>
                     <input
                       type="number"
                       min="0"
@@ -152,16 +153,16 @@ export default function DespesaTable({ despesas, atualizar }) {
                       onChange={(e) =>
                         setEditForm((f) => ({ ...f, valor: e.target.value }))
                       }
-                      className="border border-gray-200 rounded px-2 py-1 text-sm bg-white text-gray-900 w-full"
+                      className={styles.entrada}
                     />
                   </td>
-                  <td className="px-4 py-3">
+                  <td className={styles.celula}>
                     <select
                       value={editForm.categoria ?? ""}
                       onChange={(e) =>
                         setEditForm((f) => ({ ...f, categoria: e.target.value }))
                       }
-                      className="border border-gray-200 rounded px-2 py-1 text-sm bg-white text-gray-900"
+                      className={styles.select}
                     >
                       {CATEGORIAS.map((cat) => (
                         <option key={cat} value={cat}>
@@ -170,13 +171,13 @@ export default function DespesaTable({ despesas, atualizar }) {
                       ))}
                     </select>
                   </td>
-                  <td className="px-4 py-3">
+                  <td className={styles.celula}>
                     <select
                       value={editForm.vinculo ?? ""}
                       onChange={(e) =>
                         setEditForm((f) => ({ ...f, vinculo: e.target.value }))
                       }
-                      className="border border-gray-200 rounded px-2 py-1 text-sm bg-white text-gray-900"
+                      className={styles.select}
                     >
                       {VINCULOS.map((v) => (
                         <option key={v.value} value={v.value}>
@@ -185,26 +186,26 @@ export default function DespesaTable({ despesas, atualizar }) {
                       ))}
                     </select>
                   </td>
-                  <td className="px-4 py-3">
+                  <td className={styles.celula}>
                     <input
                       type="date"
                       value={editForm.data?.split('T')[0] ?? ""}
                       onChange={(e) =>
                         setEditForm((f) => ({ ...f, data: e.target.value }))
                       }
-                      className="border border-gray-200 rounded px-2 py-1 text-sm bg-white text-gray-900"
+                      className={styles.entrada}
                     />
                   </td>
-                  <td className="px-4 py-3 text-right">
+                  <td className={`${styles.celula} ${styles.celulaAcoes}`}>
                     <button
                       onClick={() => handleEditSave(despesa._id)}
-                      className="text-xs bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded mr-1 transition-colors"
+                      className={styles.botaoAzul}
                     >
                       Salvar
                     </button>
                     <button
                       onClick={() => setEditingId(null)}
-                      className="text-xs border border-gray-200 hover:bg-gray-100 px-2 py-1 rounded transition-colors text-gray-900"
+                      className={styles.botaoCinza}
                     >
                       Cancelar
                     </button>
@@ -212,35 +213,35 @@ export default function DespesaTable({ despesas, atualizar }) {
                 </>
               ) : (
                 <>
-                  <td className="px-4 py-3 text-sm text-gray-900">
+                  <td className={styles.celula}>
                     {despesa.descricao}
                   </td>
-                  <td className="px-4 py-3 text-sm text-red-600 font-medium">
+                  <td className={`${styles.celula} ${styles.celulaValor}`}>
                     {formatCurrency(despesa.valor)}
                   </td>
-                  <td className="px-4 py-3 text-sm">
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getCategoryColor(despesa.categoria)}`}>
+                  <td className={styles.celula}>
+                    <span className={`${styles.badge} ${getBothierClassesBadge(despesa.categoria)}`}>
                       {despesa.categoria.substring(0, 3)}...
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm text-gray-900">
+                  <td className={styles.celula}>
                     {despesa.vinculo === "conta_corrente" ? "Conta Corrente" : "Cartão Crédito"}
                   </td>
-                  <td className="px-4 py-3 text-sm text-gray-900">
+                  <td className={styles.celula}>
                     {formatDate(despesa.data)}
                   </td>
-                  <td className="px-4 py-3 text-right">
-                    <div className="flex items-center justify-end gap-2">
+                  <td className={`${styles.celula} ${styles.celulaAcoes}`}>
+                    <div className={styles.botoesEvento}>
                       <button
                         onClick={() => handleEdit(despesa)}
-                        className="text-gray-600 hover:text-gray-900 transition-colors"
+                        className={styles.botaoIcon}
                         title="Editar"
                       >
                         <Pencil size={16} />
                       </button>
                       <button
                         onClick={() => deletar(despesa._id, despesa.parcelaId)}
-                        className="text-gray-600 hover:text-red-500 transition-colors"
+                        className={styles.botaoIcon}
                         title="Excluir"
                       >
                         <Trash2 size={16} />

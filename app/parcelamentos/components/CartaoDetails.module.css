@@ -1,0 +1,171 @@
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.titulo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1.25rem;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cartao {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.cabecalho {
+  padding: 1.25rem;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.cabecalho:hover {
+  background-color: #f3f4f6;
+}
+
+.cabecalhoConteudo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.cabecalhoCor {
+  width: 35px;
+  height: 35px;
+  border-radius: 0.375rem;
+  border: 1px solid #d1d5db;
+}
+
+.cabecalhoTexto {
+  flex: 1;
+}
+
+.cabecalhoNome {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.cabecalhoTipo {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.cabecalhoValor {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.icone {
+  color: #6b7280;
+  transition: transform 0.2s ease-in-out;
+}
+
+.iconAberto {
+  transform: rotate(180deg);
+}
+
+.corpo {
+  padding: 1.25rem;
+  background-color: #ffffff;
+}
+
+.meses {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mes {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mes:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.mesNome {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.itens {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 0.875rem;
+}
+
+.itemDescricao {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  color: #111827;
+}
+
+.itemTexto {
+  flex: 1;
+}
+
+.itemCategoria {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  background-color: #dbeafe;
+  color: #1e40af;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.itemValor {
+  font-weight: 600;
+  color: #dc2626;
+  text-align: right;
+  min-width: 80px;
+}
+
+.vazio {
+  text-align: center;
+  padding: 2rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+}

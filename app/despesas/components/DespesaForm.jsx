@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import styles from "./DespesaForm.module.css";
 
 export default function DespesaForm({ atualizar }) {
   const [descricao, setDescricao] = useState("");
@@ -80,28 +81,28 @@ export default function DespesaForm({ atualizar }) {
   }
 
   return (
-    <div className="border border-gray-200 rounded-lg p-6 mb-6 bg-white">
+    <div className={styles.formulario}>
 
-      <h2 className="mb-5 text-xl font-bold text-gray-900">
+      <h2 className={styles.titulo}>
         Adicionar Nova Despesa
       </h2>
 
-      <form className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4" onSubmit={adicionarDespesa}>
+      <form className={styles.grid} onSubmit={adicionarDespesa}>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="descricao" className="text-sm font-bold text-gray-900">Descrição</label>
+        <div className={styles.campo}>
+          <label htmlFor="descricao" className={styles.label}>Descrição</label>
           <input
             id="descricao"
             type="text"
             placeholder="Ex: Conta de luz"
             value={descricao}
             onChange={(e) => setDescricao(e.target.value)}
-            className="border border-gray-200 rounded-md px-3 py-2 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={styles.entrada}
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="valor" className="text-sm font-bold text-gray-900">Valor Total (R$)</label>
+        <div className={styles.campo}>
+          <label htmlFor="valor" className={styles.label}>Valor Total (R$)</label>
           <input
             id="valor"
             type="number"
@@ -110,28 +111,28 @@ export default function DespesaForm({ atualizar }) {
             placeholder="R$ 0,00"
             value={valor}
             onChange={(e) => setValor(e.target.value)}
-            className="border border-gray-200 rounded-md px-3 py-2 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={styles.entrada}
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="data" className="text-sm font-bold text-gray-900">Data da Compra / 1º Vencimento</label>
+        <div className={styles.campo}>
+          <label htmlFor="data" className={styles.label}>Data da Compra / 1º Vencimento</label>
           <input
             id="data"
             type="date"
             value={data}
             onChange={(e) => setData(e.target.value)}
-            className="border border-gray-200 rounded-md px-3 py-2 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={styles.entrada}
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="categoria" className="text-sm font-bold text-gray-900">Categoria</label>
+        <div className={styles.campo}>
+          <label htmlFor="categoria" className={styles.label}>Categoria</label>
           <select
             id="categoria"
             value={categoria}
             onChange={(e) => setCategoria(e.target.value)}
-            className="border border-gray-200 rounded-md px-3 py-2 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={styles.select}
           >
             {CATEGORIAS.map((cat) => (
               <option key={cat} value={cat}>
@@ -141,8 +142,8 @@ export default function DespesaForm({ atualizar }) {
           </select>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="parcelas" className="text-sm font-bold text-gray-900">Nº de Parcelas</label>
+        <div className={styles.campo}>
+          <label htmlFor="parcelas" className={styles.label}>Nº de Parcelas</label>
           <input
             id="parcelas"
             type="number"
@@ -150,12 +151,12 @@ export default function DespesaForm({ atualizar }) {
             max="48"
             value={numeroParcelas}
             onChange={(e) => setNumeroParcelas(e.target.value)}
-            className="border border-gray-200 rounded-md px-3 py-2 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={styles.entrada}
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="vinculo" className="text-sm font-bold text-gray-900">Conta / Cartão (Opcional)</label>
+        <div className={styles.campo}>
+          <label htmlFor="vinculo" className={styles.label}>Conta / Cartão (Opcional)</label>
           <select
             id="vinculo"
             value={cartaoId}
@@ -168,7 +169,7 @@ export default function DespesaForm({ atualizar }) {
                 }
               }
             }}
-            className="border border-gray-200 rounded-md px-3 py-2 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={styles.select}
           >
             <option value="">Nenhum (Padrão)</option>
             {cartoes.map((cartao) => (
@@ -179,10 +180,10 @@ export default function DespesaForm({ atualizar }) {
           </select>
         </div>
 
-        <div className="col-span-1 md:col-span-3 flex justify-end mt-2">
+        <div className={styles.acoes}>
           <button 
             type="submit"
-            className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-md text-sm transition-colors"
+            className={styles.botaoEnviar}
           >
             Adicionar Despesa
           </button>

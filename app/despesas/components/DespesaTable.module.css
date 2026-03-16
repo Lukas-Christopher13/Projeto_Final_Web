@@ -1,0 +1,200 @@
+.tabela {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.vazio {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+}
+
+.vazioDados {
+  text-align: center;
+  padding: 2rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.tabelaElemento {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cabecalho {
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+.coluna {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.colunaAcoes {
+  text-align: right;
+}
+
+.linha {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.linha:hover {
+  background-color: #f9fafb;
+}
+
+.linha:last-child {
+  border-bottom: none;
+}
+
+.celula {
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.celulaAcoes {
+  text-align: right;
+}
+
+.celulaValor {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.entrada {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  background-color: #ffffff;
+  color: #111827;
+  width: 100%;
+}
+
+.entrada:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.select {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  background-color: #ffffff;
+  color: #111827;
+  width: 100%;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badgeCasas {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badgeAlimentacao {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.badgeTransporte {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
+
+.badgeSaude {
+  background-color: #fce7f3;
+  color: #be185d;
+}
+
+.badgeEducacao {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.badgeLazer {
+  background-color: #fae8ff;
+  color: #6f28d9;
+}
+
+.badgeCompras {
+  background-color: #fed7aa;
+  color: #92400e;
+}
+
+.badgeOutros {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.botoesEvento {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.botaoIcon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: opacity 0.2s ease-in-out;
+  color: #6b7280;
+}
+
+.botaoIcon:hover {
+  opacity: 0.7;
+}
+
+.botaoAzul {
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.botaoAzul:hover {
+  background-color: #2563eb;
+}
+
+.botaoCinza {
+  background-color: #d1d5db;
+  color: #374151;
+  border: none;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.botaoCinza:hover {
+  background-color: #e5e7eb;
+}

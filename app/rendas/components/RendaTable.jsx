@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
+import styles from "./RendaTable.module.css";
 
 const TIPOS = ["Única", "Mensal", "Semanal", "Quinzenal", "Anual"];
 
@@ -63,8 +64,8 @@ export default function RendaTable({ rendas, atualizar }) {
 
   if (rendas.length === 0) {
     return (
-      <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
-        <div className="text-center py-8 text-gray-600 text-sm">
+      <div className={styles.vazio}>
+        <div className={styles.vazioDados}>
           Nenhuma renda encontrada para este período.
         </div>
       </div>
@@ -72,23 +73,23 @@ export default function RendaTable({ rendas, atualizar }) {
   }
 
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
-      <table className="w-full">
-        <thead>
-          <tr className="border-b border-gray-200 bg-gray-50">
-            <th className="text-left px-4 py-3 text-xs text-gray-600 tracking-wider uppercase font-semibold">
+    <div className={styles.tabela}>
+      <table className={styles.tabelaElemento}>
+        <thead className={styles.cabecalho}>
+          <tr>
+            <th className={styles.coluna}>
               Descrição
             </th>
-            <th className="text-left px-4 py-3 text-xs text-gray-600 tracking-wider uppercase font-semibold">
+            <th className={styles.coluna}>
               Valor
             </th>
-            <th className="text-left px-4 py-3 text-xs text-gray-600 tracking-wider uppercase font-semibold">
+            <th className={styles.coluna}>
               Data
             </th>
-            <th className="text-left px-4 py-3 text-xs text-gray-600 tracking-wider uppercase font-semibold">
+            <th className={styles.coluna}>
               Tipo
             </th>
-            <th className="text-right px-4 py-3 text-xs text-gray-600 tracking-wider uppercase font-semibold">
+            <th className={`${styles.coluna} ${styles.colunaAcoes}`}>
               Ações
             </th>
           </tr>
@@ -97,21 +98,21 @@ export default function RendaTable({ rendas, atualizar }) {
           {rendas.map((renda) => (
             <tr
               key={renda._id}
-              className="border-b border-gray-200 last:border-0 hover:bg-gray-50 transition-colors"
+              className={styles.linha}
             >
               {editingId === renda._id ? (
                 <>
-                  <td className="px-4 py-3">
+                  <td className={styles.celula}>
                     <input
                       type="text"
                       value={editForm.descricao ?? ""}
                       onChange={(e) =>
                         setEditForm((f) => ({ ...f, descricao: e.target.value }))
                       }
-                      className="border border-gray-200 rounded px-2 py-1 text-sm bg-white text-gray-900 w-full"
+                      className={styles.entrada}
                     />
                   </td>
-                  <td className="px-4 py-3">
+                  <td className={styles.celula}>
                     <input
                       type="number"
                       min="0"
@@ -120,26 +121,26 @@ export default function RendaTable({ rendas, atualizar }) {
                       onChange={(e) =>
                         setEditForm((f) => ({ ...f, valor: e.target.value }))
                       }
-                      className="border border-gray-200 rounded px-2 py-1 text-sm bg-white text-gray-900 w-full"
+                      className={styles.entrada}
                     />
                   </td>
-                  <td className="px-4 py-3">
+                  <td className={styles.celula}>
                     <input
                       type="date"
                       value={editForm.data?.split('T')[0] ?? ""}
                       onChange={(e) =>
                         setEditForm((f) => ({ ...f, data: e.target.value }))
                       }
-                      className="border border-gray-200 rounded px-2 py-1 text-sm bg-white text-gray-900"
+                      className={styles.entrada}
                     />
                   </td>
-                  <td className="px-4 py-3">
+                  <td className={styles.celula}>
                     <select
                       value={editForm.tipo ?? ""}
                       onChange={(e) =>
                         setEditForm((f) => ({ ...f, tipo: e.target.value }))
                       }
-                      className="border border-gray-200 rounded px-2 py-1 text-sm bg-white text-gray-900"
+                      className={styles.select}
                     >
                       {TIPOS.map((t) => (
                         <option key={t} value={t.toLowerCase()}>
@@ -148,16 +149,16 @@ export default function RendaTable({ rendas, atualizar }) {
                       ))}
                     </select>
                   </td>
-                  <td className="px-4 py-3 text-right">
+                  <td className={`${styles.celula} ${styles.celulaAcoes}`}>
                     <button
                       onClick={() => handleEditSave(renda._id)}
-                      className="text-xs bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded mr-1 transition-colors"
+                      className={styles.botaoAzul}
                     >
                       Salvar
                     </button>
                     <button
                       onClick={() => setEditingId(null)}
-                      className="text-xs border border-gray-200 hover:bg-gray-100 px-2 py-1 rounded transition-colors text-gray-900"
+                      className={styles.botaoCinza}
                     >
                       Cancelar
                     </button>
@@ -165,30 +166,30 @@ export default function RendaTable({ rendas, atualizar }) {
                 </>
               ) : (
                 <>
-                  <td className="px-4 py-3 text-sm text-gray-900">
+                  <td className={styles.celula}>
                     {renda.descricao}
                   </td>
-                  <td className="px-4 py-3 text-sm text-green-600 font-medium">
+                  <td className={styles.celula}>
                     {formatCurrency(renda.valor)}
                   </td>
-                  <td className="px-4 py-3 text-sm text-gray-900">
+                  <td className={styles.celula}>
                     {formatDate(renda.data)}
                   </td>
-                  <td className="px-4 py-3 text-sm text-gray-900 capitalize">
+                  <td className={styles.celula}>
                     {renda.tipo}
                   </td>
-                  <td className="px-4 py-3 text-right">
-                    <div className="flex items-center justify-end gap-2">
+                  <td className={`${styles.celula} ${styles.celulaAcoes}`}>
+                    <div className={styles.botoesEvento}>
                       <button
                         onClick={() => handleEdit(renda)}
-                        className="text-gray-600 hover:text-gray-900 transition-colors"
+                        className={styles.botaoIcon}
                         title="Editar"
                       >
                         <Pencil size={16} />
                       </button>
                       <button
                         onClick={() => deletar(renda._id)}
-                        className="text-gray-600 hover:text-red-500 transition-colors"
+                        className={styles.botaoIcon}
                         title="Excluir"
                       >
                         <Trash2 size={16} />

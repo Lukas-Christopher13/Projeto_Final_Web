@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import styles from "./CartaoForm.module.css";
 
 export default function CartaoForm({ onSuccess }) {
   const [loading, setLoading] = useState(false);
@@ -49,8 +50,8 @@ export default function CartaoForm({ onSuccess }) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-xl font-bold text-gray-900 mb-6">Adicionar Conta/Cartão</h2>
+    <div className={styles.formulario}>
+      <h2 className={styles.titulo}>Adicionar Conta/Cartão</h2>
 
       {error && (
         <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded">
@@ -59,9 +60,9 @@ export default function CartaoForm({ onSuccess }) {
       )}
 
       <form onSubmit={handleSubmit}>
-        <div className="space-y-5">
-          <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2">
+        <div className={styles.grid}>
+          <div className={styles.campo}>
+            <label className={styles.label}>
               Nome da Conta/Cartão
             </label>
             <input
@@ -71,13 +72,13 @@ export default function CartaoForm({ onSuccess }) {
               onChange={(e) =>
                 setFormData((f) => ({ ...f, nome: e.target.value }))
               }
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className={styles.entrada}
               placeholder="Ex: Nubank, MerPago"
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2">
+          <div className={styles.campo}>
+            <label className={styles.label}>
               Tipo
             </label>
             <select
@@ -85,15 +86,15 @@ export default function CartaoForm({ onSuccess }) {
               onChange={(e) =>
                 setFormData((f) => ({ ...f, tipo: e.target.value }))
               }
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className={styles.select}
             >
               <option value="credito">Cartão de Crédito</option>
               <option value="debito">Cartão de Débito</option>
             </select>
           </div>
 
-          <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2">
+          <div className={styles.campo}>
+            <label className={styles.label}>
               Nome do Titular
             </label>
             <input
@@ -103,13 +104,13 @@ export default function CartaoForm({ onSuccess }) {
               onChange={(e) =>
                 setFormData((f) => ({ ...f, titular: e.target.value }))
               }
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className={styles.entrada}
               placeholder="Ex: João Silva"
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2">
+          <div className={styles.campo}>
+            <label className={styles.label}>
               Últimos 4 dígitos
             </label>
             <input
@@ -124,26 +125,26 @@ export default function CartaoForm({ onSuccess }) {
                   ultimos4Digitos: e.target.value.replace(/[^0-9]/g, "")
                 }))
               }
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className={styles.entrada}
               placeholder="Ex: 9999"
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2">
+          <div className={styles.campo}>
+            <label className={styles.label}>
               Cor do Cartão
             </label>
-            <div className="flex items-center gap-3">
+            <div className={styles.containerCor}>
               <input
                 type="color"
                 value={formData.cor}
                 onChange={(e) =>
                   setFormData((f) => ({ ...f, cor: e.target.value }))
                 }
-                className="w-20 h-10 border border-gray-300 rounded cursor-pointer"
+                className={styles.inputCor}
               />
               <div
-                className="w-32 h-10 rounded border border-gray-300"
+                className={styles.preview}
                 style={{ backgroundColor: formData.cor }}
               />
             </div>
@@ -153,7 +154,7 @@ export default function CartaoForm({ onSuccess }) {
         <button
           type="submit"
           disabled={loading}
-          className="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-400 text-white font-semibold py-2 rounded transition-colors"
+          className={styles.botaoEnviar}
         >
           {loading ? "Adicionando..." : "Adicionar"}
         </button>

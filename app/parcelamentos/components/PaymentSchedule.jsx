@@ -1,5 +1,7 @@
 "use client";
 
+import styles from "./PaymentSchedule.module.css";
+
 function formatCurrency(value) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
@@ -13,9 +15,9 @@ export default function PaymentSchedule({ resumoMensal }) {
 
   if (meses.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-4">Resumo Mensal (Geral)</h3>
-        <p className="text-center text-gray-600 text-sm py-6">
+      <div className={styles.card}>
+        <h3 className={styles.titulo}>Resumo Mensal (Geral)</h3>
+        <p className={styles.vazio}>
           Nenhuma dívida futura encontrada
         </p>
       </div>
@@ -23,19 +25,16 @@ export default function PaymentSchedule({ resumoMensal }) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h3 className="text-lg font-bold text-gray-900 mb-4">Resumo Mensal (Geral)</h3>
+    <div className={styles.card}>
+      <h3 className={styles.titulo}>Resumo Mensal (Geral)</h3>
       
-      <div className="space-y-3">
+      <div className={styles.lista}>
         {meses.map(([mes, total]) => (
-          <div
-            key={mes}
-            className="flex items-center justify-between p-3 border border-gray-200 rounded hover:bg-gray-50 transition-colors"
-          >
-            <span className="text-sm font-medium text-gray-900 capitalize">
+          <div key={mes} className={styles.item}>
+            <span className={styles.mes}>
               {mes}
             </span>
-            <span className="text-sm font-semibold text-red-600">
+            <span className={styles.valor}>
               {formatCurrency(total)}
             </span>
           </div>

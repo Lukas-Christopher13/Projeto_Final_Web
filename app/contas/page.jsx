@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import CartaoForm from "./components/CartaoForm";
 import CartaoList from "./components/CartaoList";
+import styles from "./page.module.css";
 
 export default function ContasPage() {
   const [cartoes, setCartoes] = useState([]);
@@ -31,25 +32,25 @@ export default function ContasPage() {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-gray-50 flex flex-col">
-      <div className="flex-1 overflow-auto">
-        <div className="p-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Gerenciar Contas</h1>
+    <div className={styles.pagina}>
+      <div className={styles.conteudo}>
+        <div className={styles.container}>
+          <h1 className={styles.titulo}>Gerenciar Contas</h1>
 
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-600 text-sm rounded">
+          <div className={styles.erroMensagem}>
             {error}
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-1">
+        <div className={styles.layout}>
+          <div>
             <CartaoForm onSuccess={carregarCartoes} />
           </div>
 
-          <div className="lg:col-span-2">
+          <div>
             {loading ? (
-              <div className="bg-white rounded-lg shadow-md p-6 text-center text-gray-600">
+              <div className={styles.carregando}>
                 Carregando cartões...
               </div>
             ) : (
