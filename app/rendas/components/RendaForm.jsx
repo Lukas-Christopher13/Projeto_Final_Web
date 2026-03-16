@@ -101,7 +101,7 @@ export default function RendaForm({ atualizar }) {
             type="submit"
             className={styles.botaoEnviar}
           >
-            Adicionar
+            Adicionar Renda
           </button>
         </div>
       </form>

@@ -99,69 +99,71 @@ export default function CartaoList({ cartoes, atualizar }) {
         {cartoes.map((cartao) => (
           <div key={cartao._id} className={styles.cartao}>
             {editingId === cartao._id ? (
-              <div className="p-4 bg-gray-50 space-y-3">
-                <input
-                  type="text"
-                  value={editForm.nome || ""}
-                  onChange={(e) =>
-                    setEditForm((f) => ({ ...f, nome: e.target.value }))
-                  }
-                  className={styles.entrada}
-                  placeholder="Nome"
-                />
-                <select
-                  value={editForm.tipo || ""}
-                  onChange={(e) =>
-                    setEditForm((f) => ({ ...f, tipo: e.target.value }))
-                  }
-                  className={styles.select}
-                >
-                  <option value="credito">Cartão de Crédito</option>
-                  <option value="debito">Cartão de Débito</option>
-                </select>
-                <input
-                  type="text"
-                  value={editForm.titular || ""}
-                  onChange={(e) =>
-                    setEditForm((f) => ({ ...f, titular: e.target.value }))
-                  }
-                  className={styles.entrada}
-                  placeholder="Titular"
-                />
-                <input
-                  type="text"
-                  maxLength="4"
-                  value={editForm.ultimos4Digitos || ""}
-                  onChange={(e) =>
-                    setEditForm((f) => ({
-                      ...f,
-                      ultimos4Digitos: e.target.value.replace(/[^0-9]/g, "")
-                    }))
-                  }
-                  className={styles.entrada}
-                  placeholder="Últimos 4"
-                />
-                <input
-                  type="color"
-                  value={editForm.cor || "#6B7280"}
-                  onChange={(e) =>
-                    setEditForm((f) => ({ ...f, cor: e.target.value }))
-                  }
-                  className={styles.inputCor}
-                />
-                <div className="flex gap-2 pt-2">
-                  <button
-                    onClick={() => handleEditSave(cartao._id)}
-                    className={styles.botaoAzul}
+              <div className={styles.edicaoContainer}>
+                <div className={styles.edicaoCampos}>
+                  <input
+                    type="text"
+                    value={editForm.nome || ""}
+                    onChange={(e) =>
+                      setEditForm((f) => ({ ...f, nome: e.target.value }))
+                    }
+                    className={styles.entrada}
+                    placeholder="Nome"
+                  />
+                  <select
+                    value={editForm.tipo || ""}
+                    onChange={(e) =>
+                      setEditForm((f) => ({ ...f, tipo: e.target.value }))
+                    }
+                    className={styles.select}
                   >
-                    Salvar
-                  </button>
-                  <button
-                    onClick={() => setEditingId(null)}
-                    className={styles.botaoCinza}
-                  >
-                    Cancelar
-                  </button>
+                    <option value="credito">Cartão de Crédito</option>
+                    <option value="debito">Cartão de Débito</option>
+                  </select>
+                  <input
+                    type="text"
+                    value={editForm.titular || ""}
+                    onChange={(e) =>
+                      setEditForm((f) => ({ ...f, titular: e.target.value }))
+                    }
+                    className={styles.entrada}
+                    placeholder="Titular"
+                  />
+                  <input
+                    type="text"
+                    maxLength="4"
+                    value={editForm.ultimos4Digitos || ""}
+                    onChange={(e) =>
+                      setEditForm((f) => ({
+                        ...f,
+                        ultimos4Digitos: e.target.value.replace(/[^0-9]/g, "")
+                      }))
+                    }
+                    className={styles.entrada}
+                    placeholder="Últimos 4"
+                  />
+                  <input
+                    type="color"
+                    value={editForm.cor || "#6B7280"}
+                    onChange={(e) =>
+                      setEditForm((f) => ({ ...f, cor: e.target.value }))
+                    }
+                    className={styles.inputCor}
+                  />
+                  <div className={styles.edicaoBotoes}>
+                    <button
+                      onClick={() => handleEditSave(cartao._id)}
+                      className={styles.botaoAzul}
+                    >
+                      Salvar
+                    </button>
+                    <button
+                      onClick={() => setEditingId(null)}
+                      className={styles.botaoCinza}
+                    >
+                      Cancelar
+                    </button>
+                  </div>
                 </div>
               </div>
             ) : (
@@ -176,7 +178,6 @@ export default function CartaoList({ cartoes, atualizar }) {
                     </div>
                     <div className={styles.cartaoNome}>{cartao.nome}</div>
                   </div>
-                  <div className={styles.cartaoTopo} />
                 </div>
                 <div className={styles.cartaoCorpo}>
                   <div className={styles.cartaoLabel}>
@@ -188,19 +189,17 @@ export default function CartaoList({ cartoes, atualizar }) {
                   <div className={styles.cartaoAcoes}>
                     <button
                       onClick={() => handleEdit(cartao)}
-                      className={styles.botag}
+                      className={styles.botaoIconEditar}
                       title="Editar"
                     >
                       <Pencil size={16} />
-                      Editar
                     </button>
                     <button
                       onClick={() => deletar(cartao._id)}
-                      className={styles.botao}
+                      className={styles.botaoIconDeletar}
                       title="Deletar"
                     >
                       <Trash2 size={16} />
-                      Deletar
                     </button>
                   </div>
                 </div>

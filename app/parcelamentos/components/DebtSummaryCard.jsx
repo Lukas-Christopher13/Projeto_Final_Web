@@ -13,9 +13,6 @@ export default function DebtSummaryCard({ totalDividas }) {
       <div className={styles.valor}>
         {formatCurrency(totalDividas)}
       </div>
-      <p className={styles.descricao}>
-        Valores parcelados a vencer nos próximos meses
-      </p>
     </div>
   );
 }

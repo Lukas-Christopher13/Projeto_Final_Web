@@ -95,8 +95,8 @@ export default function CartaoDetails({ detalhesCartao }) {
                     return dataA - dataB;
                   })
                   .map(([mes, itens]) => (
-                    <div key={mes} className={styles.meses}>
-                      <p className={styles.mes}>
+                    <div key={mes} className={styles.mes}>
+                      <p className={styles.mesTitulo}>
                         {mes}
                       </p>
                       <div className={styles.itens}>

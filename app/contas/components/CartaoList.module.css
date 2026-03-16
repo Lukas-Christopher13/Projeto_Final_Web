@@ -1,14 +1,16 @@
 .lista {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .cabecalho {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .titulo {
@@ -58,106 +60,88 @@
   border-radius: 0.5rem;
   overflow: hidden;
   background-color: #ffffff;
-  transition: box-shadow 0.2s ease-in-out;
-}
-
-.cartao:hover {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .cartaoTopo {
-  padding: 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.cartaoTopo .cor {
-  width: 40px;
-  height: 40px;
-  border-radius: 0.375rem;
-  border: 1px solid #d1d5db;
+  padding: 1rem;
+  color: #ffffff;
 }
 
 .cartaoTopoTexto {
-  flex: 1;
-}
-
-.cartaoNome {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111827;
+  display: flex;
+  flex-direction: column;
 }
 
 .cartaoNumero {
   font-size: 0.875rem;
-  color: #6b7280;
-  font-weight: 500;
+  opacity: 0.9;
+  margin-bottom: 0.25rem;
+}
+
+.cartaoNome {
+  font-size: 1.125rem;
+  font-weight: 700;
 }
 
 .cartaoCorpo {
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.cartaoLinhaInfo {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.875rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e7eb;
 }
 
 .cartaoLabel {
+  font-size: 0.75rem;
   color: #6b7280;
-  font-weight: 500;
+  margin-bottom: 0.25rem;
 }
 
 .cartaoValor {
-  color: #111827;
+  font-size: 1rem;
   font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
 }
 
 .cartaoAcoes {
   display: flex;
   gap: 0.5rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e5e7eb;
+  justify-content: flex-end;
 }
 
-.botaoIcon {
-  flex: 1;
+.botaoIconEditar {
+  padding: 0.5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.375rem;
-  padding: 0.5rem;
-  background-color: #f3f4f6;
-  border: 1px solid #e5e7eb;
   border-radius: 0.375rem;
-  cursor: pointer;
-  font-size: 0.875rem;
-  color: #374151;
   transition: all 0.2s ease-in-out;
 }
 
-.botaoIcon:hover {
-  background-color: #e5e7eb;
+.botaoIconEditar:hover {
+  color: #111827;
+  background-color: #d1d5db;
 }
 
-.botao {
-  background: none;
+.botaoIconDeletar {
+  padding: 0.5rem;
+  background-color: transparent;
   border: none;
   cursor: pointer;
-  padding: 0.25rem;
   color: #6b7280;
-  transition: opacity 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease-in-out;
 }
 
-.botao:hover {
-  opacity: 0.7;
+.botaoIconDeletar:hover {
+  color: #ef4444;
+  background-color: #fee2e2;
 }
 
 .entrada {
@@ -192,34 +176,46 @@
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
+.inputCor {
+  width: 100%;
+  height: 2.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
 .botaoAzul {
-  background-color: #3b82f6;
+  flex: 1;
+  background-color: #16a34a;
   color: #ffffff;
   border: none;
-  padding: 0.375rem 0.75rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 0.375rem;
   font-size: 0.875rem;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 }
 
 .botaoAzul:hover {
-  background-color: #2563eb;
+  background-color: #15803d;
 }
 
 .botaoCinza {
-  background-color: #d1d5db;
-  color: #374151;
-  border: none;
-  padding: 0.375rem 0.75rem;
+  flex: 1;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  color: #111827;
+  padding: 0.5rem 0.75rem;
   border-radius: 0.375rem;
   font-size: 0.875rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .botaoCinza:hover {
-  background-color: #e5e7eb;
+  background-color: #f3f4f6;
 }
 
 .vazio {
@@ -227,4 +223,21 @@
   padding: 2rem;
   color: #6b7280;
   font-size: 0.875rem;
+}
+
+.edicaoContainer {
+  padding: 1rem;
+  background-color: #f9fafb;
+}
+
+.edicaoCampos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.edicaoBotoes {
+  display: flex;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
 }

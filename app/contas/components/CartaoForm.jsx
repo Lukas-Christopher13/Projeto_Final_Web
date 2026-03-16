@@ -54,7 +54,7 @@ export default function CartaoForm({ onSuccess }) {
       <h2 className={styles.titulo}>Adicionar Conta/Cartão</h2>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded">
+        <div className={styles.erro}>
           {error}
         </div>
       )}
