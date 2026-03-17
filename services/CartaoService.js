@@ -1,6 +1,32 @@
 import CartaoRepository from "@/repositories/CartaoRepository"
 
 class CartaoService {
+
+    async getCartoes() {
+        return await CartaoRepository.getCartoes();
+    }
+
+    async createCartao(body) {
+
+        const cartao = {
+        nome: body.nome,
+        tipo: body.tipo,
+        titular: body.titular,
+        ultimos4Digitos: body.ultimos4Digitos,
+        cor: body.cor || "#6B7280"
+        };
+
+        return await CartaoRepository.createCartao(cartao);
+    }
+
+    async updateCartao(id, body) {
+        return await CartaoRepository.updateCartao(id, body);
+    }
+
+    async deleteCartao(id) {
+        return await CartaoRepository.deleteCartao(id);
+    }
+
     async despesasPorCartao(ano=null) {
         let cartaoDespesas;
 

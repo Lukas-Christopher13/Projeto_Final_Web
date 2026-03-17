@@ -1,7 +1,35 @@
 import Cartao from "@/models/Cartao";
+import { connectDB } from "../utils/mongodb";
 
 class CartaoRepository {
+
+    async getCartoes() {
+        await connectDB();
+        return await Cartao.find().sort({ createdAt: -1 });
+    }
+
+    async createCartao(cartao) {
+        await connectDB();
+        return await Cartao.create(cartao);
+    }
+
+    async updateCartao(id, body) {
+        await connectDB();
+
+        return await Cartao.findByIdAndUpdate(
+        id,
+        body,
+        { new: true, runValidators: true }
+        );
+    }
+
+    async deleteCartao(id) {
+        await connectDB();
+        return await Cartao.findByIdAndDelete(id);
+    }
+
     async getCartaoDespesas() {
+        await connectDB();
         const resultado = await Cartao.aggregate([
             {
                 $lookup: {
@@ -17,6 +45,7 @@ class CartaoRepository {
     }
 
     async getCartaoDespesasPorAno(ano) {
+        await connectDB();
         const inicioAno = new Date(`${ano}-01-01`);
         const fimAno = new Date(`${ano}-12-31`);
 
