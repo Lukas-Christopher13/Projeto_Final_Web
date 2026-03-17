@@ -1,7 +1,10 @@
 import Despesa from "@/models/Despesa";
+import { connectDB } from "../utils/mongodb";
 
 class DespesasRepository {
   async getDespesasPorAno(ano) {
+    await connectDB();
+
     const inicioAno = new Date(`${ano}-01-01`);
     const fimAno = new Date(`${ano}-12-31`);
 
@@ -14,6 +17,8 @@ class DespesasRepository {
   }
 
   async getDespesasContaCorrente(ano) {
+    await connectDB();
+
     const inicioAno = new Date(`${ano}-01-01`);
     const fimAno = new Date(`${ano}-12-31`);
 
@@ -27,6 +32,8 @@ class DespesasRepository {
   }
 
   async getDespesasPorMes(mes, ano) {
+    await connectDB();
+
     const inicio = new Date(ano, mes - 1, 1);
     const fim = new Date(ano, mes, 0, 23, 59, 59);
 
@@ -39,6 +46,7 @@ class DespesasRepository {
   }
 
   async createDespesas(despesas) {
+    await connectDB();
     return await Despesa.insertMany(despesas);
   }
 }

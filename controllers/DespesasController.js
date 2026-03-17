@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "@/utils/mongodb";
 import DespesasService from "@/services/DespesasService";
 
 class DespesasController {
   async getTotalDespesas(ano = null) {
     try {
-      await connectDB();
       const despesas = await DespesasService.getTotalDespesas(ano);
       return NextResponse.json(despesas);
     } catch (error) {
@@ -18,7 +16,6 @@ class DespesasController {
 
   async getTotalDespesasContaCorrente(ano = null) {
     try {
-      await connectDB();
       const despesas = await DespesasService.getDespesasContaCorrente(ano);
       return NextResponse.json(despesas);
     } catch (error) {
@@ -38,7 +35,6 @@ class DespesasController {
         );
       }
 
-      await connectDB();
       const despesas = await DespesasService.getDespesasPorMes(mes, ano);
       return NextResponse.json(despesas);
     } catch (error) {
@@ -51,8 +47,6 @@ class DespesasController {
 
   async createDespesa(body) {
     try {
-      await connectDB();
-
       const {
         descricao,
         valor,

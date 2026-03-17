@@ -1,8 +1,12 @@
 import Despesa from "@/models/Despesa";
-import Cartao from "@/models/Cartao"; 
+import Cartao from "@/models/Cartao";
+import { connectDB } from "../utils/mongodb";
 
 class ParcelamentosRepository {
   async getFuturesExpenses() {
+
+    await connectDB();
+
     const hoje = new Date();
     const mesAtual = hoje.getMonth() + 1;
     const anoAtual = hoje.getFullYear();

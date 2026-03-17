@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "../utils/mongodb";
 import RendaService from "@/services/RendaService";
 
 class RendaController {
     async criar(req) {
-        await connectDB();
         const body = await req.json();
 
         const renda = await RendaService.criarRenda(body);
@@ -13,7 +11,6 @@ class RendaController {
     }
 
     async listar(req) {
-        await connectDB();
         const { searchParams } = new URL(req.url);
 
         const mes = parseInt(searchParams.get("mes"));
@@ -25,14 +22,12 @@ class RendaController {
     }
 
     async deletar(id) {
-        await connectDB();
         await RendaService.deletarRenda(id);
 
         return Response.json({ message: "Renda deletada" });
     }
 
     async getTotalRenda(ano=null) {
-        await connectDB();
 
         try {
             const rendas = await RendaService.getTotalRenda(ano);
@@ -46,7 +41,6 @@ class RendaController {
     }
 
     async getRendasPor(ano) {
-        await connectDB();
 
         try {
             const rendas = await RendaService.getRendasPor(ano);

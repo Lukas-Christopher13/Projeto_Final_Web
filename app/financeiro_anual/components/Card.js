@@ -20,8 +20,8 @@ const coresCartao = {
 };
 
 export default function Card(props) {
-    const fonte = coresCartao[props.nome].fonte || "#000";
-    const background = coresCartao[props.nome].background || "#999";
+    const fonte = coresCartao[props.nome]?.fonte || "#000";
+    const background = coresCartao[props.nome]?.background || "#999";
 
     return (
         <div className={styles.card} style={{ backgroundColor: background }}>

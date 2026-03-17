@@ -1,21 +1,16 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "../utils/mongodb";
 import { aporteSchema } from "@/schemas/aporte.schema";
 
 import AporteService from "../services/AporteService";
 
 class AporteController {
     async list() {
-        await connectDB();
-
         const aportes = await AporteService.getAllAportes();
 
         return NextResponse.json(aportes)
     }
 
     async create(body) {
-        await connectDB();
-        
         try {
             const aportValido = aporteSchema.parse(body)
             
@@ -31,7 +26,6 @@ class AporteController {
     }
 
     async update(id, body) {
-        await connectDB();
         try {
             const aporteAtualizado = await AporteService.update(id, body)
 
@@ -46,8 +40,6 @@ class AporteController {
     }
 
     async delete(id) {
-        await connectDB();
-
         try {
             const aporte = AporteService.findByIdAndDelete(id)
 
@@ -72,23 +64,18 @@ class AporteController {
     }
 
     async totalAcumulado() {
-        await connectDB();
-
         const total = await AporteService.getTotalAcumulado()
 
         return NextResponse.json(total)
     }
 
     async total() {
-        await connectDB();
-
         const valorTotal = await AporteService.getValorTotal()
 
         return NextResponse.json(valorTotal)
     }
 
     async exportarHistorico() {
-        await connectDB();
 
         try {
             const planilha = await AporteService.exportarHistorico();

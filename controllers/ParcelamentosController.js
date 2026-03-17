@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "@/utils/mongodb";
 import ParcelamentosService from "@/services/ParcelamentosService";
 
 class ParcelamentosController {
   async getFuturesExpenses() {
     try {
-      await connectDB();
       const parcelamentos = await ParcelamentosService.getParcelamentos();
       return NextResponse.json(parcelamentos);
     } catch (error) {
