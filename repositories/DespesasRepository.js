@@ -49,6 +49,31 @@ class DespesasRepository {
     await connectDB();
     return await Despesa.insertMany(despesas);
   }
+
+    async getDespesaById(id) {
+        await connectDB();
+        return await Despesa.findById(id);
+    }
+
+    async deleteById(id) {
+        await connectDB();
+        return await Despesa.findByIdAndDelete(id);
+    }
+
+    async deleteByParcelaId(parcelaId) {
+        await connectDB();
+        return await Despesa.deleteMany({ parcelaId });
+    }
+
+    async updateById(id, body) {
+        await connectDB();
+
+        return await Despesa.findByIdAndUpdate(
+            id,
+            body,
+            { new: true }
+        );
+    }
 }
 
 export default new DespesasRepository();

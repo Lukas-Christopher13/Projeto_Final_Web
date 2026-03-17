@@ -48,6 +48,26 @@ class DespesasService {
 
     return await DespesasRepository.createDespesas(despesas);
   }
+
+    async deleteDespesa(id, deleteAll = false) {
+
+    const despesa = await DespesasRepository.getDespesaById(id);
+
+    if (!despesa) return null;
+
+    if (deleteAll) {
+        await DespesasRepository.deleteByParcelaId(despesa.parcelaId);
+        return { message: "Todas as parcelas deletadas" };
+    }
+
+    await DespesasRepository.deleteById(id);
+
+    return { message: "Despesa deletada" };
+    }
+
+    async updateDespesa(id, body) {
+    return await DespesasRepository.updateById(id, body);
+    }
 }
 
 export default new DespesasService();

@@ -86,6 +86,49 @@ class DespesasController {
       );
     }
   }
-}
+
+    async deleteDespesa(id, deleteAll = false) {
+        try {
+        const result = await DespesasService.deleteDespesa(id, deleteAll);
+
+        if (!result) {
+            return NextResponse.json(
+            { error: "Despesa não encontrada" },
+            { status: 404 }
+            );
+        }
+
+        return NextResponse.json(result);
+
+        } catch (error) {
+        return NextResponse.json(
+            { error: error.message },
+            { status: 500 }
+        );
+        }
+    }
+
+    async updateDespesa(id, body) {
+        try {
+        const despesa = await DespesasService.updateDespesa(id, body);
+
+        if (!despesa) {
+            return NextResponse.json(
+            { error: "Despesa não encontrada" },
+            { status: 404 }
+            );
+        }
+
+        return NextResponse.json(despesa);
+
+        } catch (error) {
+        return NextResponse.json(
+            { error: error.message },
+            { status: 500 }
+        );
+        }
+    }
+    }
+
 
 export default new DespesasController();
