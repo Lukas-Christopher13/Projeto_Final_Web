@@ -33,7 +33,7 @@ export default function CardExpenseDetails(props) {
                 <tbody>
                     {gastosPorCartao.map((cartao) => (
                         <tr key={cartao.id} className={styles.table_row}>
-                            <th><Card nome={cartao.nome}/></th>
+                            <th><Card nome={cartao.nome} cor={cartao.cor} /></th>
                             <th><p>R$ {cartao.total.toFixed(2)}</p></th>
                         </tr>
                     ))}

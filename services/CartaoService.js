@@ -12,6 +12,7 @@ class CartaoService {
             return {
                 id: cartao._id,
                 nome: cartao.nome,
+                cor: cartao.cor,
                 total: totalDespesas
             };
         });

@@ -1,9 +1,7 @@
 import Cartao from "@/models/Cartao";
-import { connectDB } from "../utils/mongodb";
 
 class CartaoRepository {
     async getCartaoDespesas() {
-        await connectDB();
         const resultado = await Cartao.aggregate([
             {
                 $lookup: {
@@ -19,7 +17,6 @@ class CartaoRepository {
     }
 
     async getCartaoDespesasPorAno(ano) {
-        await connectDB();
         const inicioAno = new Date(`${ano}-01-01`);
         const fimAno = new Date(`${ano}-12-31`);
 
@@ -47,6 +44,7 @@ class CartaoRepository {
                 $group: {
                     _id: "$_id",
                     nome: { $first: "$nome" },
+                    cor: { $first: "$cor" },
                     limite: { $first: "$limite" },
                     despesas: { $push: "$despesas" }
                 }
