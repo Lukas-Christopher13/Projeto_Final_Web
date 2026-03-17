@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import Grafico from "./grafico"
-import Total from "./Total"
-import AdicionarAReserva from "./adicionar_a_reserva"
-import Historico from "./historico"
+import Grafico from "./components/grafico"
+import Total from "./components/Total"
+import AdicionarAReserva from "./components/adicionar_a_reserva"
+import Historico from "./components/historico"
 
 import styles from "@/app/reserva_investimento/page.module.css"
 

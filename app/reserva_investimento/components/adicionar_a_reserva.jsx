@@ -1,10 +1,10 @@
 "use client"
 import crypto from "crypto";
 
-import styles from "@/app/reserva_investimento/adicionar_a_reservar.module.css"
+import styles from "@/app/reserva_investimento/components/adicionar_a_reservar.module.css"
 
-import Button from "./components/Button"
-import TextInput from "./components/TextInput"
+import Button from "./Button"
+import TextInput from "./TextInput"
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"

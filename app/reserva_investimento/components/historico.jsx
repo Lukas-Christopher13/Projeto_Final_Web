@@ -1,12 +1,12 @@
 "use client"
 
-import styles  from "@/app/reserva_investimento/historico.module.css"
-import ExportarHistoricoButton from "../components/ExportarHistoricoButton"
+import styles  from "@/app/reserva_investimento/components/historico.module.css"
+import ExportarHistoricoButton from "../../components/ExportarHistoricoButton"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { FaPen, FaTrash } from "react-icons/fa"
-import Modal from "./components/Modal"
-import TextInput from "./components/TextInput"
+import Modal from "./Modal"
+import TextInput from "./TextInput"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { aporteSchema } from "@/schemas/aporte.schema"
 

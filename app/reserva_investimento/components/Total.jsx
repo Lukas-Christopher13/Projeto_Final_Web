@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import styles from "@/app/reserva_investimento/total.module.css"
+import styles from "@/app/reserva_investimento/components/total.module.css"
 
 
 export default function Total(props) {

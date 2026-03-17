@@ -12,7 +12,7 @@ import {
 } from 'recharts'
 import { useEffect, useState } from 'react'
 
-import styles  from "@/app/reserva_investimento/grafico.module.css"
+import styles  from "@/app/reserva_investimento/components/grafico.module.css"
 
 
 export default function Grafico(props) {
