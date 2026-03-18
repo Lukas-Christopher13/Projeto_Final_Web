@@ -2,15 +2,15 @@ import rendaController from "../../../../controllers/RendaController";
 import { requireAuth } from "@/utils/authGuard";
 
 export async function DELETE(req, { params }) {
-  const { response } = requireAuth(req);
+  const { user, response } = requireAuth(req);
   if (response) return response;
   const { id } = await params;
-  return await rendaController.deletar(id);
+  return await rendaController.deletar(id, user.id);
 }
 
 export async function PUT(req, { params }) {
-  const { response } = requireAuth(req);
+  const { user, response } = requireAuth(req);
   if (response) return response;
   const { id } = await params;
-  return await rendaController.atualizar(req, id);
+  return await rendaController.atualizar(req, id, user.id);
 }

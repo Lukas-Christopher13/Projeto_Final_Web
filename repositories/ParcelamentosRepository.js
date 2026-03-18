@@ -3,7 +3,7 @@ import Cartao from "@/models/Cartao";
 import { connectDB } from "../utils/mongodb";
 
 class ParcelamentosRepository {
-  async getFuturesExpenses() {
+  async getFuturesExpenses(userId) {
 
     await connectDB();
 
@@ -22,7 +22,8 @@ class ParcelamentosRepository {
             ]
           }
         ]
-      }
+      },
+      usuarioId: userId
     })
       .populate("cartao")
       .sort({ data: 1 });

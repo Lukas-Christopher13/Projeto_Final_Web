@@ -6,6 +6,7 @@ import RendaTable from "./components/RendaTable";
 import { FileText } from "lucide-react";
 import styles from "./page.module.css";
 import useRequireAuth from "@/app/components/Auth/useRequireAuth";
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 const MESES = [
   "janeiro", "fevereiro", "março", "abril", "maio", "junho",
@@ -20,7 +21,9 @@ export default function RendasPage() {
 
   const carregarRendas = useCallback(async () => {
     try {
-      const res = await fetch(`/api/rendas?mes=${mes}&ano=${ano}`);
+      const res = await fetch(`/api/rendas?mes=${mes}&ano=${ano}`, {
+        headers: getAuthHeaders(),
+      });
       if (!res.ok) throw new Error("Falha ao buscar");
       const data = await res.json();
       setRendas(data);

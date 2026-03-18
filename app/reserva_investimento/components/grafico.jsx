@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from 'react'
 
 import styles  from "@/app/reserva_investimento/components/grafico.module.css"
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 
 export default function Grafico(props) {
@@ -20,7 +21,9 @@ export default function Grafico(props) {
 
     useEffect(() => {
         async function getDados() {
-            const response = await fetch("/api/aportes/total_acumulado");
+            const response = await fetch("/api/aportes/total_acumulado", {
+                headers: getAuthHeaders(),
+            });
             const data = await response.json();
             setDados(data)
             props.setAportes(props.aportes)

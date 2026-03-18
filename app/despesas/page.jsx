@@ -6,6 +6,7 @@ import DespesaTable from "./components/DespesaTable";
 import { FileText } from "lucide-react";
 import styles from "./page.module.css";
 import useRequireAuth from "@/app/components/Auth/useRequireAuth";
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 const MESES = [
   "janeiro", "fevereiro", "março", "abril", "maio", "junho",
@@ -20,7 +21,9 @@ export default function DespesasPage() {
 
   const carregarDespesas = useCallback(async () => {
     try {
-      const res = await fetch(`/api/despesas?mes=${mes}&ano=${ano}`);
+      const res = await fetch(`/api/despesas?mes=${mes}&ano=${ano}`, {
+        headers: getAuthHeaders(),
+      });
       if (!res.ok) throw new Error("Falha ao buscar");
       const data = await res.json();
       setDespesas(Array.isArray(data) ? data : []);

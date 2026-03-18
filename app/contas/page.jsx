@@ -5,6 +5,7 @@ import CartaoForm from "./components/CartaoForm";
 import CartaoList from "./components/CartaoList";
 import styles from "./page.module.css";
 import useRequireAuth from "@/app/components/Auth/useRequireAuth";
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 export default function ContasPage() {
   useRequireAuth();
@@ -15,7 +16,9 @@ export default function ContasPage() {
   async function carregarCartoes() {
     try {
       setLoading(true);
-      const response = await fetch("/api/cartoes");
+      const response = await fetch("/api/cartoes", {
+        headers: getAuthHeaders(),
+      });
       if (!response.ok) throw new Error("Erro ao buscar cartões");
 
       const data = await response.json();

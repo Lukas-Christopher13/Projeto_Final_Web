@@ -41,6 +41,12 @@ const DespesaSchema = new mongoose.Schema({
         required: false
     },
 
+    usuarioId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
+
     parcelaId: {
         type: String,
         required: false

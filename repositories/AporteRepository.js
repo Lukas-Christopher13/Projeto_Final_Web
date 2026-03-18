@@ -1,26 +1,29 @@
 import Aporte from "../models/Aporte";
 import { connectDB } from "../utils/mongodb";
 class AporteRepository {
-    async findAll() {
+    async findAll(userId) {
         await connectDB();
-        return await Aporte.find();
+        return await Aporte.find({ usuarioId: userId });
     }
 
-    async create(aporte) {
+    async create(aporte, userId) {
         await connectDB();
-        return await Aporte.create(aporte)
+        return await Aporte.create({ ...aporte, usuarioId: userId })
     }
 
-    async findByIdAndDelete(id) {
+    async findByIdAndDelete(id, userId) {
         await connectDB();
-        return await Aporte.findByIdAndDelete(id)
+        return await Aporte.findOneAndDelete({ _id: id, usuarioId: userId })
     }
 
-    async update(id, body) {
+    async update(id, body, userId) {
         await connectDB();
-        return await Aporte.findByIdAndUpdate(id, body, {new: true})
+        return await Aporte.findOneAndUpdate(
+            { _id: id, usuarioId: userId },
+            body,
+            { new: true }
+        )
     }
 }
 
 export default new AporteRepository();
-

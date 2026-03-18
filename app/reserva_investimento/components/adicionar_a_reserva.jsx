@@ -9,6 +9,7 @@ import TextInput from "./TextInput"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { aporteSchema } from "@/schemas/aporte.schema"
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 
 export default function AdicionarAReserva(props) {
@@ -20,9 +21,7 @@ export default function AdicionarAReserva(props) {
     async function onSubmit(data) {
         const response = await fetch("/api/aportes", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: getAuthHeaders(true),
             body: JSON.stringify(data)
         });
 

@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import ParcelamentosService from "@/services/ParcelamentosService";
 
 class ParcelamentosController {
-  async getFuturesExpenses() {
+  async getFuturesExpenses(userId) {
     try {
-      const parcelamentos = await ParcelamentosService.getParcelamentos();
+      const parcelamentos = await ParcelamentosService.getParcelamentos(userId);
       return NextResponse.json(parcelamentos);
     } catch (error) {
       console.error("Erro ao buscar dívidas:", error);

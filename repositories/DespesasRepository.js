@@ -2,21 +2,7 @@ import Despesa from "@/models/Despesa";
 import { connectDB } from "../utils/mongodb";
 
 class DespesasRepository {
-  async getDespesasPorAno(ano) {
-    await connectDB();
-
-    const inicioAno = new Date(`${ano}-01-01`);
-    const fimAno = new Date(`${ano}-12-31`);
-
-    return await Despesa.find({
-      data: {
-        $gte: inicioAno,
-        $lte: fimAno
-      }
-    }).exec();
-  }
-
-  async getDespesasContaCorrente(ano) {
+  async getDespesasPorAno(ano, userId) {
     await connectDB();
 
     const inicioAno = new Date(`${ano}-01-01`);
@@ -27,11 +13,27 @@ class DespesasRepository {
         $gte: inicioAno,
         $lte: fimAno
       },
-      vinculo: "conta_corrente"
+      usuarioId: userId
     }).exec();
   }
 
-  async getDespesasPorMes(mes, ano) {
+  async getDespesasContaCorrente(ano, userId) {
+    await connectDB();
+
+    const inicioAno = new Date(`${ano}-01-01`);
+    const fimAno = new Date(`${ano}-12-31`);
+
+    return await Despesa.find({
+      data: {
+        $gte: inicioAno,
+        $lte: fimAno
+      },
+      vinculo: "conta_corrente",
+      usuarioId: userId
+    }).exec();
+  }
+
+  async getDespesasPorMes(mes, ano, userId) {
     await connectDB();
 
     const inicio = new Date(ano, mes - 1, 1);
@@ -41,35 +43,37 @@ class DespesasRepository {
       data: {
         $gte: inicio,
         $lte: fim
-      }
+      },
+      usuarioId: userId
     }).sort({ data: -1 });
   }
 
-  async createDespesas(despesas) {
+  async createDespesas(despesas, userId) {
     await connectDB();
-    return await Despesa.insertMany(despesas);
+    const payload = despesas.map((d) => ({ ...d, usuarioId: userId }));
+    return await Despesa.insertMany(payload);
   }
 
-    async getDespesaById(id) {
+    async getDespesaById(id, userId) {
         await connectDB();
-        return await Despesa.findById(id);
+        return await Despesa.findOne({ _id: id, usuarioId: userId });
     }
 
-    async deleteById(id) {
+    async deleteById(id, userId) {
         await connectDB();
-        return await Despesa.findByIdAndDelete(id);
+        return await Despesa.findOneAndDelete({ _id: id, usuarioId: userId });
     }
 
-    async deleteByParcelaId(parcelaId) {
+    async deleteByParcelaId(parcelaId, userId) {
         await connectDB();
-        return await Despesa.deleteMany({ parcelaId });
+        return await Despesa.deleteMany({ parcelaId, usuarioId: userId });
     }
 
-    async updateById(id, body) {
+    async updateById(id, body, userId) {
         await connectDB();
 
-        return await Despesa.findByIdAndUpdate(
-            id,
+        return await Despesa.findOneAndUpdate(
+            { _id: id, usuarioId: userId },
             body,
             { new: true }
         );

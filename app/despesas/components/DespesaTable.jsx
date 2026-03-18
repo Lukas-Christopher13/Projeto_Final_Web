@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import styles from "./DespesaTable.module.css";
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 const CATEGORIAS = [
   "Contas da Casa",
@@ -53,7 +54,8 @@ export default function DespesaTable({ despesas, atualizar }) {
 
     try {
       await fetch(`/api/despesas/${id}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: getAuthHeaders(),
       });
       atualizar();
     } catch (err) {
@@ -71,9 +73,7 @@ export default function DespesaTable({ despesas, atualizar }) {
     try {
       await fetch(`/api/despesas/${id}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: getAuthHeaders(true),
         body: JSON.stringify({
           descricao: editForm.descricao,
           valor: Number(editForm.valor),

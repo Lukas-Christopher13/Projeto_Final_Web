@@ -2,18 +2,18 @@ import DespesasRepository from "@/repositories/DespesasRepository";
 import { v4 as uuidv4 } from "uuid";
 
 class DespesasService {
-  async getTotalDespesas(ano = null) {
-    const despesas = await DespesasRepository.getDespesasPorAno(ano);
+  async getTotalDespesas(ano = null, userId) {
+    const despesas = await DespesasRepository.getDespesasPorAno(ano, userId);
     return despesas.reduce((acc, despesa) => acc + despesa.valor, 0);
   }
 
-  async getDespesasContaCorrente(ano = null) {
-    const despesas = await DespesasRepository.getDespesasContaCorrente(ano);
+  async getDespesasContaCorrente(ano = null, userId) {
+    const despesas = await DespesasRepository.getDespesasContaCorrente(ano, userId);
     return despesas.reduce((acc, despesa) => acc + despesa.valor, 0);
   }
 
-  async getDespesasPorMes(mes, ano) {
-    return await DespesasRepository.getDespesasPorMes(mes, ano);
+  async getDespesasPorMes(mes, ano, userId) {
+    return await DespesasRepository.getDespesasPorMes(mes, ano, userId);
   }
 
   async createDespesasComParcelas(
@@ -23,7 +23,8 @@ class DespesasService {
     categoria,
     vinculo,
     cartao,
-    numeroParcelas = 1
+    numeroParcelas = 1,
+    userId
   ) {
     const parcelaId = uuidv4();
     const despesas = [];
@@ -46,27 +47,27 @@ class DespesasService {
       despesas.push(despesa);
     }
 
-    return await DespesasRepository.createDespesas(despesas);
+    return await DespesasRepository.createDespesas(despesas, userId);
   }
 
-    async deleteDespesa(id, deleteAll = false) {
+    async deleteDespesa(id, deleteAll = false, userId) {
 
-    const despesa = await DespesasRepository.getDespesaById(id);
+    const despesa = await DespesasRepository.getDespesaById(id, userId);
 
     if (!despesa) return null;
 
     if (deleteAll) {
-        await DespesasRepository.deleteByParcelaId(despesa.parcelaId);
+        await DespesasRepository.deleteByParcelaId(despesa.parcelaId, userId);
         return { message: "Todas as parcelas deletadas" };
     }
 
-    await DespesasRepository.deleteById(id);
+    await DespesasRepository.deleteById(id, userId);
 
     return { message: "Despesa deletada" };
     }
 
-    async updateDespesa(id, body) {
-    return await DespesasRepository.updateById(id, body);
+    async updateDespesa(id, body, userId) {
+    return await DespesasRepository.updateById(id, body, userId);
     }
 }
 

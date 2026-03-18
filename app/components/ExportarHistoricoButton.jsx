@@ -1,10 +1,13 @@
 import { FaFile } from "react-icons/fa"
 import styles from "@/app/components/ExportarHistoricoButton.module.css"
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 export default function ExportarHistoricoButton() {
 
     async function exportarPlanilha() {
-        const response = await fetch("/api/aportes/exportar");
+        const response = await fetch("/api/aportes/exportar", {
+            headers: getAuthHeaders(),
+        });
 
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);

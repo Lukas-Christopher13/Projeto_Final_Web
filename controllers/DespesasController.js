@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import DespesasService from "@/services/DespesasService";
 
 class DespesasController {
-  async getTotalDespesas(ano = null) {
+  async getTotalDespesas(ano = null, userId) {
     try {
-      const despesas = await DespesasService.getTotalDespesas(ano);
+      const despesas = await DespesasService.getTotalDespesas(ano, userId);
       return NextResponse.json(despesas);
     } catch (error) {
       return NextResponse.json(
@@ -14,9 +14,9 @@ class DespesasController {
     }
   }
 
-  async getTotalDespesasContaCorrente(ano = null) {
+  async getTotalDespesasContaCorrente(ano = null, userId) {
     try {
-      const despesas = await DespesasService.getDespesasContaCorrente(ano);
+      const despesas = await DespesasService.getDespesasContaCorrente(ano, userId);
       return NextResponse.json(despesas);
     } catch (error) {
       return NextResponse.json(
@@ -26,7 +26,7 @@ class DespesasController {
     }
   }
 
-  async getDespesasPorMes(mes, ano) {
+  async getDespesasPorMes(mes, ano, userId) {
     try {
       if (!mes || !ano) {
         return NextResponse.json(
@@ -35,7 +35,7 @@ class DespesasController {
         );
       }
 
-      const despesas = await DespesasService.getDespesasPorMes(mes, ano);
+      const despesas = await DespesasService.getDespesasPorMes(mes, ano, userId);
       return NextResponse.json(despesas);
     } catch (error) {
       return NextResponse.json(
@@ -45,7 +45,7 @@ class DespesasController {
     }
   }
 
-  async createDespesa(body) {
+  async createDespesa(body, userId) {
     try {
       const {
         descricao,
@@ -75,7 +75,8 @@ class DespesasController {
         categoria,
         vinculo,
         cartao,
-        numeroParcelas
+        numeroParcelas,
+        userId
       );
 
       return NextResponse.json(despesas);
@@ -87,9 +88,9 @@ class DespesasController {
     }
   }
 
-    async deleteDespesa(id, deleteAll = false) {
+    async deleteDespesa(id, deleteAll = false, userId) {
         try {
-        const result = await DespesasService.deleteDespesa(id, deleteAll);
+        const result = await DespesasService.deleteDespesa(id, deleteAll, userId);
 
         if (!result) {
             return NextResponse.json(
@@ -108,9 +109,9 @@ class DespesasController {
         }
     }
 
-    async updateDespesa(id, body) {
+    async updateDespesa(id, body, userId) {
         try {
-        const despesa = await DespesasService.updateDespesa(id, body);
+        const despesa = await DespesasService.updateDespesa(id, body, userId);
 
         if (!despesa) {
             return NextResponse.json(

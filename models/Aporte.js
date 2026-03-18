@@ -4,7 +4,12 @@ const AporteSchema = new mongoose.Schema(
     {
         valor: { type: Number, require: true },
         data:  { type: Date,   require: true },
-        fonte: { type: String, require: true }
+        fonte: { type: String, require: true },
+        usuarioId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true
+        }
     },
     { timestamps: true }
 );

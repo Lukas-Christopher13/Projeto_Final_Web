@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styles from "./RendaForm.module.css";
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 export default function RendaForm({ atualizar }) {
 
@@ -17,9 +18,7 @@ export default function RendaForm({ atualizar }) {
 
     await fetch("/api/rendas", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: getAuthHeaders(true),
       body: JSON.stringify({
         descricao,
         valor: Number(valor),

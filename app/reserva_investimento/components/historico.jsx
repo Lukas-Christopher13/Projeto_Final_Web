@@ -9,6 +9,7 @@ import Modal from "./Modal"
 import TextInput from "./TextInput"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { aporteSchema } from "@/schemas/aporte.schema"
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 
 export default function Historico(props) {
@@ -47,9 +48,7 @@ export default function Historico(props) {
 
         const response = await fetch(`/api/aportes/${aporteId}`, {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: getAuthHeaders(true),
             body: JSON.stringify(data)
         })
 
@@ -77,6 +76,7 @@ export default function Historico(props) {
 
         await fetch(`/api/aportes/${aporteId}`, {
             method: "DELETE",
+            headers: getAuthHeaders(),
         })
 
         props.setAportes(props.aportes.filter(aporte => aporte.id !== aporteId));
@@ -85,7 +85,9 @@ export default function Historico(props) {
 
     useEffect(() => {
         async function getAportes() {
-            const response = await fetch("/api/aportes")
+            const response = await fetch("/api/aportes", {
+                headers: getAuthHeaders(),
+            })
             const result = await response.json()
             props.setAportes(result)
         }

@@ -4,17 +4,17 @@ import { aporteSchema } from "@/schemas/aporte.schema";
 import AporteService from "../services/AporteService";
 
 class AporteController {
-    async list() {
-        const aportes = await AporteService.getAllAportes();
+    async list(userId) {
+        const aportes = await AporteService.getAllAportes(userId);
 
         return NextResponse.json(aportes)
     }
 
-    async create(body) {
+    async create(body, userId) {
         try {
             const aportValido = aporteSchema.parse(body)
             
-            AporteService.create(aportValido)
+            await AporteService.create(aportValido, userId)
 
             return NextResponse.json({sucesso: true})
         } catch (error) {
@@ -25,9 +25,9 @@ class AporteController {
         }
     }
 
-    async update(id, body) {
+    async update(id, body, userId) {
         try {
-            const aporteAtualizado = await AporteService.update(id, body)
+            const aporteAtualizado = await AporteService.update(id, body, userId)
 
             return NextResponse.json(aporteAtualizado)
 
@@ -39,9 +39,9 @@ class AporteController {
         }
     }
 
-    async delete(id) {
+    async delete(id, userId) {
         try {
-            const aporte = AporteService.findByIdAndDelete(id)
+            const aporte = await AporteService.findByIdAndDelete(id, userId)
 
             if (!aporte) {
                 return NextResponse.json(
@@ -63,22 +63,22 @@ class AporteController {
         }
     }
 
-    async totalAcumulado() {
-        const total = await AporteService.getTotalAcumulado()
+    async totalAcumulado(userId) {
+        const total = await AporteService.getTotalAcumulado(userId)
 
         return NextResponse.json(total)
     }
 
-    async total() {
-        const valorTotal = await AporteService.getValorTotal()
+    async total(userId) {
+        const valorTotal = await AporteService.getValorTotal(userId)
 
         return NextResponse.json(valorTotal)
     }
 
-    async exportarHistorico() {
+    async exportarHistorico(userId) {
 
         try {
-            const planilha = await AporteService.exportarHistorico();
+            const planilha = await AporteService.exportarHistorico(userId);
 
             return new NextResponse(planilha, {
                 status: 200,

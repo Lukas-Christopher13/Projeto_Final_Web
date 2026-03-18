@@ -2,8 +2,8 @@ import * as XLSX from "xlsx"
 import AporteRepository from "../repositories/AporteRepository";
 
 class AporteService {
-    async getAllAportes() {
-        let aportes = await AporteRepository.findAll();
+    async getAllAportes(userId) {
+        let aportes = await AporteRepository.findAll(userId);
         aportes.sort((a, b) => new Date(b.data) - new Date(a.data));
 
         return aportes.map(aporte => {
@@ -12,20 +12,20 @@ class AporteService {
         })
     }
 
-    async create(aporte) {
-        return await AporteRepository.create(aporte);
+    async create(aporte, userId) {
+        return await AporteRepository.create(aporte, userId);
     }
 
-    async update(id, body) {
-        return await AporteRepository.update(id, body)
+    async update(id, body, userId) {
+        return await AporteRepository.update(id, body, userId)
     }
 
-    async findByIdAndDelete(id) {
-        return await AporteRepository.findByIdAndDelete(id);
+    async findByIdAndDelete(id, userId) {
+        return await AporteRepository.findByIdAndDelete(id, userId);
     }
 
-    async getTotalAcumulado() {
-        let aportes = await AporteRepository.findAll();
+    async getTotalAcumulado(userId) {
+        let aportes = await AporteRepository.findAll(userId);
         aportes.sort((a, b) => new Date(a.data) - new Date(b.data))
 
         let acumulador = 0;
@@ -42,8 +42,8 @@ class AporteService {
         return aportes;
     }
 
-    async getValorTotal() {
-        let aporte = await AporteRepository.findAll();
+    async getValorTotal(userId) {
+        let aporte = await AporteRepository.findAll(userId);
         let valor = aporte.reduce((acc, aporte) => acc + aporte.valor, 0)
 
         valor = Intl.NumberFormat("pt-BR", {
@@ -54,8 +54,8 @@ class AporteService {
         return {valorTotal: valor}
     }
 
-    async exportarHistorico() {
-        let aportes = await AporteRepository.findAll()
+    async exportarHistorico(userId) {
+        let aportes = await AporteRepository.findAll(userId)
         aportes.sort((a, b) => new Date(a.data) - new Date(b.data))
         
         aportes = aportes.map(aporte => ({

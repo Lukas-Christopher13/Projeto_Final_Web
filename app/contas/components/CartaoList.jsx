@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Pencil, Trash2, FileText } from "lucide-react";
 import styles from "./CartaoList.module.css";
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 export default function CartaoList({ cartoes, atualizar }) {
   const [editingId, setEditingId] = useState(null);
@@ -32,7 +33,8 @@ export default function CartaoList({ cartoes, atualizar }) {
 
     try {
       const response = await fetch(`/api/cartoes/${id}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: getAuthHeaders(),
       });
 
       if (!response.ok) throw new Error("Erro ao deletar");
@@ -51,9 +53,7 @@ export default function CartaoList({ cartoes, atualizar }) {
     try {
       const response = await fetch(`/api/cartoes/${id}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: getAuthHeaders(true),
         body: JSON.stringify({
           nome: editForm.nome,
           tipo: editForm.tipo,

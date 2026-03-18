@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 import GraphBarCharService from "@/services/GraphBarCharService";
 
 class GrapBarChartController {
-    async getGraphBarCharData(ano) {
+    async getGraphBarCharData(ano, userId) {
 
         try {
-            const data = await GraphBarCharService.getGrapBarCharData(ano);
+            const data = await GraphBarCharService.getGrapBarCharData(ano, userId);
             return NextResponse.json(data);
         } catch (error) {
             return NextResponse.json(

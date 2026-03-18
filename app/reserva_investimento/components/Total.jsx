@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import styles from "@/app/reserva_investimento/components/total.module.css"
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 
 export default function Total(props) {
@@ -14,7 +15,9 @@ export default function Total(props) {
 
     useEffect(() => {
         async function getTotal() {
-            const response = await fetch("/api/aportes/total")
+            const response = await fetch("/api/aportes/total", {
+                headers: getAuthHeaders(),
+            })
             const result = await response.json()
             setTotal(result.valorTotal)
             props.setAportes(props.aportes)

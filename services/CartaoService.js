@@ -2,11 +2,11 @@ import CartaoRepository from "@/repositories/CartaoRepository"
 
 class CartaoService {
 
-    async getCartoes() {
-        return await CartaoRepository.getCartoes();
+    async getCartoes(userId) {
+        return await CartaoRepository.getCartoes(userId);
     }
 
-    async createCartao(body) {
+    async createCartao(body, userId) {
 
         const cartao = {
         nome: body.nome,
@@ -16,22 +16,22 @@ class CartaoService {
         cor: body.cor || "#6B7280"
         };
 
-        return await CartaoRepository.createCartao(cartao);
+        return await CartaoRepository.createCartao(cartao, userId);
     }
 
-    async updateCartao(id, body) {
-        return await CartaoRepository.updateCartao(id, body);
+    async updateCartao(id, body, userId) {
+        return await CartaoRepository.updateCartao(id, body, userId);
     }
 
-    async deleteCartao(id) {
-        return await CartaoRepository.deleteCartao(id);
+    async deleteCartao(id, userId) {
+        return await CartaoRepository.deleteCartao(id, userId);
     }
 
-    async despesasPorCartao(ano=null) {
+    async despesasPorCartao(ano=null, userId) {
         let cartaoDespesas;
 
-        if (ano) cartaoDespesas = await CartaoRepository.getCartaoDespesasPorAno(ano);
-        else cartaoDespesas = await CartaoRepository.getCartaoDespesas(); 
+        if (ano) cartaoDespesas = await CartaoRepository.getCartaoDespesasPorAno(ano, userId);
+        else cartaoDespesas = await CartaoRepository.getCartaoDespesas(userId); 
 
         const despesasPorCartao = cartaoDespesas.map(cartao => {
             const totalDespesas = cartao.despesas.reduce((total, despesa) => total + despesa.valor, 0);

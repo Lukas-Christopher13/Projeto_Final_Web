@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styles from "./CartaoForm.module.css";
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 export default function CartaoForm({ onSuccess }) {
   const [loading, setLoading] = useState(false);
@@ -22,9 +23,7 @@ export default function CartaoForm({ onSuccess }) {
     try {
       const response = await fetch("/api/cartoes", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: getAuthHeaders(true),
         body: JSON.stringify(formData)
       });
 

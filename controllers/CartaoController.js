@@ -2,14 +2,14 @@ import { NextResponse } from "next/server";
 import CartaoService from "@/services/CartaoService";
 
 class CartaoController {
-    async despesasPorCartao(ano = null) {
+    async despesasPorCartao(ano = null, userId) {
         try {
             if (ano) {
-                let gastosPorCartao = await CartaoService.despesasPorCartao(ano);
+                let gastosPorCartao = await CartaoService.despesasPorCartao(ano, userId);
                 return NextResponse.json(gastosPorCartao)
             }
 
-            let gastosPorCartao = await CartaoService.despesasPorCartao();
+            let gastosPorCartao = await CartaoService.despesasPorCartao(null, userId);
             return NextResponse.json(gastosPorCartao)
         } catch (error) {
             return NextResponse.json(
@@ -19,9 +19,9 @@ class CartaoController {
         }
     }
 
-    async getCartoes() {
+    async getCartoes(userId) {
         try {
-            const cartoes = await CartaoService.getCartoes();
+            const cartoes = await CartaoService.getCartoes(userId);
             return NextResponse.json(cartoes);
         } catch (error) {
             return NextResponse.json(
@@ -31,9 +31,9 @@ class CartaoController {
         }
     }
 
-    async createCartao(body) {
+    async createCartao(body, userId) {
         try {
-        const cartao = await CartaoService.createCartao(body);
+        const cartao = await CartaoService.createCartao(body, userId);
         return NextResponse.json(cartao, { status: 201 });
         } catch (error) {
         return NextResponse.json(
@@ -43,9 +43,9 @@ class CartaoController {
         }
     }
 
-    async updateCartao(id, body) {
+    async updateCartao(id, body, userId) {
         try {
-        const cartao = await CartaoService.updateCartao(id, body);
+        const cartao = await CartaoService.updateCartao(id, body, userId);
 
         if (!cartao) {
             return NextResponse.json(
@@ -63,9 +63,9 @@ class CartaoController {
         }
     }
 
-    async deleteCartao(id) {
+    async deleteCartao(id, userId) {
         try {
-        const cartao = await CartaoService.deleteCartao(id);
+        const cartao = await CartaoService.deleteCartao(id, userId);
 
         if (!cartao) {
             return NextResponse.json(
@@ -85,9 +85,9 @@ class CartaoController {
         }
     }
 
-    async despesasPorCartao(ano = null) {
+    async despesasPorCartao(ano = null, userId) {
         try {
-        const gastos = await CartaoService.despesasPorCartao(ano);
+        const gastos = await CartaoService.despesasPorCartao(ano, userId);
         return NextResponse.json(gastos);
         } catch (error) {
         return NextResponse.json(

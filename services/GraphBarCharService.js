@@ -2,7 +2,7 @@ import DespesasRepository from "@/repositories/DespesasRepository";
 import RendaRepository from "@/repositories/RendaRepository";
 
 class DespesasService {
-    async getGrapBarCharData(ano) {    
+    async getGrapBarCharData(ano, userId) {    
         const mesesNomes = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     
         const meses = mesesNomes.map(m => ({
@@ -11,8 +11,8 @@ class DespesasService {
             despesa: 0
         }));
     
-        const despesas = await DespesasRepository.getDespesasPorAno(ano);
-        const rendas = await RendaRepository.getRendaPorAno(ano)
+        const despesas = await DespesasRepository.getDespesasPorAno(ano, userId);
+        const rendas = await RendaRepository.getRendaPorAno(ano, userId)
     
         despesas.forEach(d => meses[new Date(d.data).getMonth()].despesa += d.valor);
         rendas.forEach(r => meses[new Date(r.data).getMonth()].renda += r.valor);

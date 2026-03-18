@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import styles from "./DespesaForm.module.css";
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 export default function DespesaForm({ atualizar }) {
   const [descricao, setDescricao] = useState("");
@@ -27,7 +28,9 @@ export default function DespesaForm({ atualizar }) {
   useEffect(() => {
     const carregarCartoes = async () => {
       try {
-        const response = await fetch("/api/cartoes");
+        const response = await fetch("/api/cartoes", {
+          headers: getAuthHeaders(),
+        });
         if (response.ok) {
           const data = await response.json();
           setCartoes(data);
@@ -51,9 +54,7 @@ export default function DespesaForm({ atualizar }) {
     try {
       await fetch("/api/despesas", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: getAuthHeaders(true),
         body: JSON.stringify({
           descricao,
           valor: Number(valor),

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import styles from "./RendaTable.module.css";
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 const TIPOS = ["Única", "Mensal", "Semanal", "Quinzenal", "Anual"];
 
@@ -25,7 +26,8 @@ export default function RendaTable({ rendas, atualizar }) {
 
     try {
       await fetch(`/api/rendas/${id}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: getAuthHeaders(),
       });
       atualizar();
     } catch (err) {
@@ -43,9 +45,7 @@ export default function RendaTable({ rendas, atualizar }) {
     try {
       await fetch(`/api/rendas/${id}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: getAuthHeaders(true),
         body: JSON.stringify({
           descricao: editForm.descricao,
           valor: Number(editForm.valor),

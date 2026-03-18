@@ -6,6 +6,7 @@ import DebtSummaryCard from "./components/DebtSummaryCard";
 import PaymentSchedule from "./components/PaymentSchedule";
 import CartaoDetails from "./components/CartaoDetails";
 import useRequireAuth from "@/app/components/Auth/useRequireAuth";
+import { getAuthHeaders } from "@/app/components/Auth/authHeaders";
 
 export default function ParcelamentosPage() {
   useRequireAuth();
@@ -21,7 +22,9 @@ export default function ParcelamentosPage() {
     const carregarDados = async () => {
       try {
         setLoading(true);
-        const response = await fetch("/api/parcelamentos");
+        const response = await fetch("/api/parcelamentos", {
+          headers: getAuthHeaders(),
+        });
         if (!response.ok) throw new Error("Erro ao buscar dados");
 
         const resultado = await response.json();

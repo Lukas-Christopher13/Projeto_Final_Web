@@ -28,6 +28,12 @@ const CartaoSchema = new mongoose.Schema({
     cor: {
         type: String,
         default: "#6B7280"
+    },
+
+    usuarioId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 
 }, {

@@ -1,8 +1,8 @@
 import ParcelamentosRepository from "@/repositories/ParcelamentosRepository";
 
 class ParcelamentosService {
-  async getParcelamentos() {
-    const despesas = await ParcelamentosRepository.getFuturesExpenses();
+  async getParcelamentos(userId) {
+    const despesas = await ParcelamentosRepository.getFuturesExpenses(userId);
 
     const indiceParcelaPorId = this._calcularIndicesParcelas(despesas);
     const contadorParcelas = this._contarParcelasPorId(despesas);
