@@ -15,7 +15,7 @@ export default function FinanceiroAnual() {
     const [ano, setAno] = useState(new Date().getFullYear());
 
     return (
-        <div className={styles.page}>
+        <div className={styles.page} id="pdf-content">
             <YearFilter anoAtual={ano} setAno={setAno} />
 
             <AnnualSummary anoAtual={ano} />
