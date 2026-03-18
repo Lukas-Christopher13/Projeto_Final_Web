@@ -44,7 +44,7 @@ export default function TransactionsList({
               </span>
               <button
                 className={styles.deleteBtn}
-                onClick={() => onDelete(tx._id)}
+                onClick={() => onDelete(tx._id, tx.source)}
                 type="button"
               >
                 🗑

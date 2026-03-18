@@ -27,7 +27,7 @@ const MONTHS = [
   "Dezembro",
 ];
 const CATEGORIES = {
-  income: ["Salário", "Freelance", "Investimentos", "Aluguel", "Outros"],
+  income: ["Única", "Mensal", "Semanal", "Quinzenal", "Anual"],
   expense: [
     "Alimentação",
     "Moradia",
@@ -103,16 +103,68 @@ export default function DashboardPage() {
   const fetchData = useCallback(async () => {
     setFetching(true);
     try {
-      const [sumRes, txRes] = await Promise.all([
-        fetch(`/api/transactions/summary?month=${month}&year=${year}`, {
-          headers,
-        }),
-        fetch(`/api/transactions?limit=50`, { headers }),
+      const [rendasRes, despesasRes] = await Promise.all([
+        fetch(`/api/rendas?mes=${month}&ano=${year}`, { headers }),
+        fetch(`/api/despesas?mes=${month}&ano=${year}`, { headers }),
       ]);
-      const sumData = await sumRes.json();
-      const txData = await txRes.json();
-      if (sumData.success) setSummary(sumData.summary);
-      if (txData.success) setTransactions(txData.transactions);
+      const rendasData = await rendasRes.json();
+      const despesasData = await despesasRes.json();
+
+      const rendas = Array.isArray(rendasData) ? rendasData : [];
+      const despesas = Array.isArray(despesasData) ? despesasData : [];
+
+      const income = rendas.reduce((acc, r) => acc + (r.valor || 0), 0);
+      const expense = despesas.reduce((acc, d) => acc + (d.valor || 0), 0);
+
+      const expensesByCategoryMap = despesas.reduce((acc, d) => {
+        const key = d.categoria || "Outros";
+        acc[key] = (acc[key] || 0) + (d.valor || 0);
+        return acc;
+      }, {});
+      const expensesByCategory = Object.entries(expensesByCategoryMap).map(
+        ([categoria, total]) => ({ _id: categoria, total })
+      );
+
+      const topExpenses = [...despesas]
+        .sort((a, b) => (b.valor || 0) - (a.valor || 0))
+        .slice(0, 5)
+        .map((d) => ({
+          _id: d._id,
+          description: d.descricao,
+          amount: d.valor,
+          category: d.categoria,
+          date: d.data,
+        }));
+
+      const mergedTransactions = [
+        ...rendas.map((r) => ({
+          _id: r._id,
+          type: "income",
+          amount: r.valor,
+          description: r.descricao,
+          category: r.tipo,
+          date: r.data,
+          source: "renda",
+        })),
+        ...despesas.map((d) => ({
+          _id: d._id,
+          type: "expense",
+          amount: d.valor,
+          description: d.descricao,
+          category: d.categoria,
+          date: d.data,
+          source: "despesa",
+        })),
+      ].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      setSummary({
+        income,
+        expense,
+        balance: income - expense,
+        expensesByCategory,
+        topExpenses,
+      });
+      setTransactions(mergedTransactions);
     } catch {
       setMsg("Erro ao carregar dados.");
     } finally {
@@ -147,10 +199,28 @@ export default function DashboardPage() {
     }
     setSubmitting(true);
     try {
-      const res = await fetch("/api/transactions", {
+      const isIncome = form.type === "income";
+      const url = isIncome ? "/api/rendas" : "/api/despesas";
+      const payload = isIncome
+        ? {
+            descricao: form.description,
+            valor: parseFloat(form.amount),
+            data: form.date || new Date().toISOString(),
+            tipo: form.category || "Mensal",
+          }
+        : {
+            descricao: form.description,
+            valor: parseFloat(form.amount),
+            data: form.date || new Date().toISOString(),
+            categoria: form.category || "Outros",
+            vinculo: "conta_corrente",
+            numeroParcelas: 1,
+          };
+
+      const res = await fetch(url, {
         method: "POST",
         headers,
-        body: JSON.stringify({ ...form, amount: parseFloat(form.amount) }),
+        body: JSON.stringify(payload),
       });
       if (res.ok) {
         setForm({
@@ -171,9 +241,11 @@ export default function DashboardPage() {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id, source) => {
     if (!confirm("Remover esta transação?")) return;
-    await fetch(`/api/transactions/${id}`, { method: "DELETE", headers });
+    const url =
+      source === "renda" ? `/api/rendas/${id}` : `/api/despesas/${id}`;
+    await fetch(url, { method: "DELETE", headers });
     fetchData();
   };
 
