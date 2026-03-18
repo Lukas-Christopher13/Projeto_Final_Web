@@ -4,25 +4,14 @@ import { connectDB } from "../utils/mongodb";
 
 class ParcelamentosRepository {
   async getFuturesExpenses(userId) {
-
     await connectDB();
 
-    const hoje = new Date();
-    const mesAtual = hoje.getMonth() + 1;
-    const anoAtual = hoje.getFullYear();
+    const inicioMesAtual = new Date();
+    inicioMesAtual.setDate(1);
+    inicioMesAtual.setHours(0, 0, 0, 0);
 
     return await Despesa.find({
-      $expr: {
-        $or: [
-          { $gt: [{ $year: "$data" }, anoAtual] },
-          {
-            $and: [
-              { $eq: [{ $year: "$data" }, anoAtual] },
-              { $gte: [{ $month: "$data" }, mesAtual] }
-            ]
-          }
-        ]
-      },
+      data: { $gte: inicioMesAtual },
       usuarioId: userId
     })
       .populate("cartao")
