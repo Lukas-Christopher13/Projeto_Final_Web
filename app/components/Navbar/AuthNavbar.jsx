@@ -22,7 +22,7 @@ export default function AuthNavbar() {
     };
   }, []);
 
-  if (isLogged === null) return null;
+  if (isLogged === null || !isLogged) return null;
 
   return <>{isLogged && <Navbar />}</>;
 }

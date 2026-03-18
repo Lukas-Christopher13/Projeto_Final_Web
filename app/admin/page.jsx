@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import AdminHeader from "./components/AdminHeader";
@@ -23,16 +23,17 @@ export default function AdminPage() {
   const [msg, setMsg] = useState("");
   const [form, setForm] = useState({ name: "", email: "", password: "" });
 
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("token") : null;
-  const headers = {
+  const tokenRef = useRef(null);
+
+  const getHeaders = () => ({
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  };
+    Authorization: `Bearer ${tokenRef.current}`,
+  });
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
-    if (!token || !savedUser) {
+    const savedToken = localStorage.getItem("token");
+    if (!savedToken || !savedUser) {
       router.push("/login");
       return;
     }
@@ -41,6 +42,7 @@ export default function AdminPage() {
       router.push("/dashboard");
       return;
     }
+    tokenRef.current = savedToken;
     setUser(u);
   }, []);
 
@@ -48,8 +50,8 @@ export default function AdminPage() {
     setFetching(true);
     try {
       const [membersRes, statsRes] = await Promise.all([
-        fetch("/api/admin/members", { headers }),
-        fetch("/api/admin/stats", { headers }),
+        fetch("/api/admin/members", { headers: getHeaders() }),
+        fetch("/api/admin/stats", { headers: getHeaders() }),
       ]);
       const mData = await membersRes.json();
       const sData = await statsRes.json();
@@ -60,7 +62,7 @@ export default function AdminPage() {
     } finally {
       setFetching(false);
     }
-  }, [token]);
+  }, []);
 
   useEffect(() => {
     if (user) fetchData();
@@ -76,7 +78,7 @@ export default function AdminPage() {
     try {
       const res = await fetch("/api/admin/members", {
         method: "POST",
-        headers,
+        headers: getHeaders(),
         body: JSON.stringify(form),
       });
       const data = await res.json();
@@ -93,14 +95,63 @@ export default function AdminPage() {
   };
 
   const handleToggle = async (id) => {
-    await fetch(`/api/admin/members/${id}/toggle`, { method: "PATCH", headers });
-    fetchData();
+    try {
+      const res = await fetch(`/api/admin/members/${id}/toggle`, {
+        method: "PATCH",
+        headers: getHeaders(),
+      });
+      if (res.ok) {
+        // Atualiza o estado local imediatamente, sem esperar o fetchData
+        setMembers((prev) =>
+          prev.map((m) => (m._id === id ? { ...m, isActive: !m.isActive } : m)),
+        );
+        setStats((prev) => {
+          const member = members.find((m) => m._id === id);
+          if (!member) return prev;
+          const delta = member.isActive ? -1 : 1;
+          return {
+            ...prev,
+            activeMembers: prev.activeMembers + delta,
+            inactiveMembers: prev.inactiveMembers - delta,
+          };
+        });
+      } else {
+        setMsg("Erro ao alterar status do membro.");
+      }
+    } catch {
+      setMsg("Erro ao conectar.");
+    }
   };
 
-  const handleDelete = async (id, name) => {
-    if (!confirm(`Excluir permanentemente "${name}"?`)) return;
-    await fetch(`/api/admin/members/${id}`, { method: "DELETE", headers });
-    fetchData();
+  const handleDelete = async (id) => {
+    try {
+      const res = await fetch(`/api/admin/members/${id}`, {
+        method: "DELETE",
+        headers: getHeaders(),
+      });
+      if (res.ok) {
+        // Remove o membro do estado local imediatamente
+        setMembers((prev) => prev.filter((m) => m._id !== id));
+        setStats((prev) => {
+          const member = members.find((m) => m._id === id);
+          const wasActive = member?.isActive;
+          return {
+            ...prev,
+            totalMembers: prev.totalMembers - 1,
+            activeMembers: wasActive
+              ? prev.activeMembers - 1
+              : prev.activeMembers,
+            inactiveMembers: wasActive
+              ? prev.inactiveMembers
+              : prev.inactiveMembers - 1,
+          };
+        });
+      } else {
+        setMsg("Erro ao remover membro.");
+      }
+    } catch {
+      setMsg("Erro ao conectar.");
+    }
   };
 
   return (

@@ -4,7 +4,7 @@ export default function AddMemberForm({ form, submitting, onChange, onSubmit }) 
   return (
     <div className={styles.card}>
       <h2 className={styles.title}>Adicionar Novo Membro</h2>
-      <form onSubmit={onSubmit} className={styles.form}>
+      <form onSubmit={onSubmit} className={styles.form} autoComplete="off">
         <input
           className={styles.input}
           placeholder="Nome"
@@ -16,6 +16,7 @@ export default function AddMemberForm({ form, submitting, onChange, onSubmit }) 
           type="email"
           placeholder="E-mail"
           value={form.email}
+          autoComplete="off"
           onChange={(e) => onChange({ ...form, email: e.target.value })}
         />
         <input
@@ -23,9 +24,14 @@ export default function AddMemberForm({ form, submitting, onChange, onSubmit }) 
           type="password"
           placeholder="Senha Temporária"
           value={form.password}
+          autoComplete="new-password"
           onChange={(e) => onChange({ ...form, password: e.target.value })}
         />
-        <button className={styles.primaryBtn} type="submit" disabled={submitting}>
+        <button
+          className={styles.primaryBtn}
+          type="submit"
+          disabled={submitting}
+        >
           {submitting ? "Adicionando..." : "+ Adicionar"}
         </button>
       </form>

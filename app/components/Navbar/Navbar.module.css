@@ -103,3 +103,10 @@
 .botaoSair:hover {
   background-color: #dc2626;
 }
+
+.userName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1835;
+  white-space: nowrap;
+}
