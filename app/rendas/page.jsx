@@ -5,6 +5,7 @@ import RendaForm from "./components/RendaForm";
 import RendaTable from "./components/RendaTable";
 import { FileText } from "lucide-react";
 import styles from "./page.module.css";
+import useRequireAuth from "@/app/components/Auth/useRequireAuth";
 
 const MESES = [
   "janeiro", "fevereiro", "março", "abril", "maio", "junho",
@@ -12,6 +13,7 @@ const MESES = [
 ];
 
 export default function RendasPage() {
+  useRequireAuth();
   const [rendas, setRendas] = useState([]);
   const [mes, setMes] = useState(new Date().getMonth() + 1);
   const [ano, setAno] = useState(new Date().getFullYear());

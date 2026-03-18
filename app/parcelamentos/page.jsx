@@ -5,8 +5,10 @@ import styles from "./page.module.css";
 import DebtSummaryCard from "./components/DebtSummaryCard";
 import PaymentSchedule from "./components/PaymentSchedule";
 import CartaoDetails from "./components/CartaoDetails";
+import useRequireAuth from "@/app/components/Auth/useRequireAuth";
 
 export default function ParcelamentosPage() {
+  useRequireAuth();
   const [data, setData] = useState({
     totalDividas: 0,
     resumoMensal: {},

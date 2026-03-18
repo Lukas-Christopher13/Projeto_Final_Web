@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import CartaoForm from "./components/CartaoForm";
 import CartaoList from "./components/CartaoList";
 import styles from "./page.module.css";
+import useRequireAuth from "@/app/components/Auth/useRequireAuth";
 
 export default function ContasPage() {
+  useRequireAuth();
   const [cartoes, setCartoes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

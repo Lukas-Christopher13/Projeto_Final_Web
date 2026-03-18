@@ -5,6 +5,7 @@ import DespesaForm from "./components/DespesaForm";
 import DespesaTable from "./components/DespesaTable";
 import { FileText } from "lucide-react";
 import styles from "./page.module.css";
+import useRequireAuth from "@/app/components/Auth/useRequireAuth";
 
 const MESES = [
   "janeiro", "fevereiro", "março", "abril", "maio", "junho",
@@ -12,6 +13,7 @@ const MESES = [
 ];
 
 export default function DespesasPage() {
+  useRequireAuth();
   const [despesas, setDespesas] = useState([]);
   const [mes, setMes] = useState(new Date().getMonth() + 1);
   const [ano, setAno] = useState(new Date().getFullYear());

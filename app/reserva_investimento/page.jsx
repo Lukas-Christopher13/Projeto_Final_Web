@@ -7,8 +7,10 @@ import AdicionarAReserva from "./components/adicionar_a_reserva"
 import Historico from "./components/historico"
 
 import styles from "@/app/reserva_investimento/page.module.css"
+import useRequireAuth from "@/app/components/Auth/useRequireAuth";
 
 export default function ReservasInvestimentos() {
+    useRequireAuth();
     const [aportes, setAportes] = useState([])
 
     return (
