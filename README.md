@@ -1,68 +1,108 @@
-# Projeto Final Web — Como Rodar
+# Finance App — Deploy, Admin e .env
 
-## Pré-requisitos
-
-- [Node.js 18+](https://nodejs.org)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+Este README foca em: **como subir o projeto em produção**, **como logar com admin** e **como criar o `.env`**.
 
 ---
 
-## 1. Instalar dependências
+## 1. Pré-requisitos
 
-```bash
-npm install
-```
+- Node.js 18+
+- MongoDB (local ou Atlas)
 
 ---
 
-## 2. Configurar variáveis de ambiente
+## 2. Criar o `.env`
 
-Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
+Crie um arquivo `.env` na raiz com:
 
 ```env
 MONGODB_URI=mongodb://localhost:27017/finance_app
-JWT_SECRET=super_secret_jwt_key
+JWT_SECRET=uma_chave_forte_aqui
 JWT_EXPIRES_IN=7d
-ADMIN_EMAIL=email_do_admin@gmail.com
+ADMIN_EMAIL=admin@financeapp.com
+ADMIN_PASSWORD=admin123
 ```
 
-> Troque `email_do_admin@gmail.com` pelo email que será usado como administrador do sistema.
-
+Notas:
+- `MONGODB_URI` pode apontar para MongoDB Atlas.
+- `JWT_SECRET` deve ser **uma string forte e única**.
+- `ADMIN_EMAIL` define o e-mail do usuário administrador.
+- `ADMIN_PASSWORD` é usado pelo `seed.js` se você decidir popular o banco.
 
 ---
 
-## 3. Rodar o projeto
+## 3. Rodar localmente (dev)
 
 ```bash
+npm install
 npm run dev
 ```
 
-Acesse no navegador: **http://localhost:3000**
+Acesse: **http://localhost:3000**
 
 ---
 
-## Primeiro acesso
+## 4. Criar o admin e logar
 
-1. Abre **http://localhost:3000/login**
-2. Clique em **"Criar conta"**
-3. Cadastre-se com o email definido em `ADMIN_EMAIL` para ter acesso de **administrador**
-4. Qualquer outro email será cadastrado como **membro**
+Você tem duas opções:
+
+**Opção A — Criar pelo login**
+1. Acesse `/login`
+2. Clique em **Criar conta**
+3. Cadastre com o e-mail igual ao `ADMIN_EMAIL` do `.env`
+4. Esse usuário será **admin automaticamente**
+
+**Opção B — Rodar seed (gera usuário admin + dados)**
+```bash
+node seed.js
+```
+O seed cria um usuário com:
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD`
+
+Depois é só logar normalmente.
+
+---
+
+## 5. Subir em produção (build + start)
+
+```bash
+npm install
+npm run build
+npm run start
+```
+
+Garanta que as variáveis de ambiente estejam configuradas no servidor.
+
+---
+
+## 6. Deploy em serviços comuns
+
+**Vercel**
+1. Suba o repositório
+2. Configure as variáveis do `.env` na plataforma
+3. Deploy automático
+
+**Servidor próprio (Ubuntu/Docker)**
+1. Configure as variáveis
+2. `npm install && npm run build && npm run start`
+3. Use um proxy (Nginx) se quiser domínio/HTTPS
 
 ---
 
 ## Rotas principais
 
-| Rota         | Descrição                          | Acesso        |
-|--------------|------------------------------------|---------------|
-| `/login`     | Tela de login e cadastro           | Público       |
-| `/dashboard` | Dashboard financeiro com gráficos  | Todos         |
-| `/admin`     | Painel de administração            | Somente admin |
+| Rota         | Descrição                         | Acesso        |
+|--------------|-----------------------------------|---------------|
+| `/login`     | Login e cadastro                  | Público       |
+| `/dashboard` | Visão financeira                  | Usuários      |
+| `/admin`     | Painel administrativo             | Somente admin |
 
 ---
 
-## Problemas comuns
+## Dica rápida
 
-**CSS não aparece**
-```bash
-npm install
-```
+Se nada aparecer no dashboard, verifique:
+1. O usuário está logado?
+2. Existem dados no banco associados a esse usuário?
+3. As variáveis do `.env` estão corretas?
