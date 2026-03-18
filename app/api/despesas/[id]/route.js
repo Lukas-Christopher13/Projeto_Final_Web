@@ -4,7 +4,7 @@ import { requireAuth } from "@/utils/authGuard";
 export async function DELETE(req, { params }) {
   const { user, response } = requireAuth(req);
   if (response) return response;
-  const { id } = params;
+  const { id } = await params;
   const { searchParams } = new URL(req.url);
   const deleteAll = searchParams.get("deleteAll") === "true";
 
@@ -14,7 +14,7 @@ export async function DELETE(req, { params }) {
 export async function PUT(req, { params }) {
   const { user, response } = requireAuth(req);
   if (response) return response;
-  const { id } = params;
+  const { id } = await params;
   const body = await req.json();
 
   return await DespesasController.updateDespesa(id, body, user.id);
