@@ -38,10 +38,3 @@ docker compose up --build
 Acesse: **http://localhost:3000**
 
 ---
-
-## Dica rápida
-
-Se nada aparecer no dashboard, verifique:
-1. O usuário está logado?
-2. Existem dados no banco associados a esse usuário?
-3. As variáveis do `.env` estão corretas?
