@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Projeto Final Web — Como Rodar
 
-## Getting Started
+## Pré-requisitos
 
-First, run the development server:
+- [Node.js 18+](https://nodejs.org)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+
+---
+
+## 1. Instalar dependências
+
+```bash
+npm install
+```
+
+---
+
+## 2. Configurar variáveis de ambiente
+
+Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
+
+```env
+MONGODB_URI=mongodb://localhost:27017/finance_app
+JWT_SECRET=super_secret_jwt_key
+JWT_EXPIRES_IN=7d
+ADMIN_EMAIL=email_do_admin@gmail.com
+```
+
+> Troque `email_do_admin@gmail.com` pelo email que será usado como administrador do sistema.
+
+
+---
+
+## 3. Rodar o projeto
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse no navegador: **http://localhost:3000**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Primeiro acesso
 
-## Learn More
+1. Abre **http://localhost:3000/login**
+2. Clique em **"Criar conta"**
+3. Cadastre-se com o email definido em `ADMIN_EMAIL` para ter acesso de **administrador**
+4. Qualquer outro email será cadastrado como **membro**
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Rotas principais
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Rota         | Descrição                          | Acesso        |
+|--------------|------------------------------------|---------------|
+| `/login`     | Tela de login e cadastro           | Público       |
+| `/dashboard` | Dashboard financeiro com gráficos  | Todos         |
+| `/admin`     | Painel de administração            | Somente admin |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Problemas comuns
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**CSS não aparece**
+```bash
+npm install
+```

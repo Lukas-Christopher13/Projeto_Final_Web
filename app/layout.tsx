@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css"
-import Navbar from "./components/Navbar/Navbar.jsx";
+import "./globals.css";
+import AuthNavbar from "@/app/components/Navbar/AuthNavbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,16 +20,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased m-0 p-0 h-screen overflow-hidden`}
       >
         <div className="h-screen flex flex-col">
-          <Navbar/>
+
+          {/* Navbar condicional */}
+          <AuthNavbar />
+
           <div className="flex-1 overflow-auto">
             {children}
           </div>

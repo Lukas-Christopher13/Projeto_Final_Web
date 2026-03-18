@@ -4,10 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Moon, Sun, LogOut } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./Navbar.module.css";
+
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [darkMode, setDarkMode] = useState(false);
 
   const links = [
@@ -25,7 +28,7 @@ export default function Navbar() {
 
   return (
     <nav className={styles.barra}>
-      <Link href="/">
+      <Link href="/dashboard">
         <span className={styles.logo}>
           Meu Gestor Financeiro
         </span>
@@ -55,8 +58,8 @@ export default function Navbar() {
         >
           {darkMode ? <Sun size={18} /> : <Moon size={18} />}
         </button>
-        <button className={styles.botaoSair}>
-          <LogOut size={16} />
+        <button className={styles.botaoSair} onClick={() => { localStorage.clear(); router.push("/login")}}>
+          <LogOut size={16}  />
           Sair
         </button>
       </div>
