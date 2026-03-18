@@ -1,13 +1,12 @@
-# Finance App — Deploy, Admin e .env
+# Finance App — Deploy (Docker Compose), Admin e .env
 
-Este README foca em: **como subir o projeto em produção**, **como logar com admin** e **como criar o `.env`**.
+Este README foca em: **subir o projeto com Docker Compose**, **como logar com admin** e **como criar o `.env`**.
 
 ---
 
 ## 1. Pré-requisitos
 
-- Node.js 18+
-- MongoDB (local ou Atlas)
+- Docker + Docker Compose
 
 ---
 
@@ -24,18 +23,18 @@ ADMIN_PASSWORD=admin123
 ```
 
 Notas:
-- `MONGODB_URI` pode apontar para MongoDB Atlas.
+- Quando usar **Docker Compose**, o `MONGODB_URI` do container já é definido no `docker-compose.yml` como `mongodb://mongo:27017/finance_app`.
+- Para rodar sem Docker, use `MONGODB_URI=mongodb://localhost:27017/finance_app`.
 - `JWT_SECRET` deve ser **uma string forte e única**.
 - `ADMIN_EMAIL` define o e-mail do usuário administrador.
 - `ADMIN_PASSWORD` é usado pelo `seed.js` se você decidir popular o banco.
 
 ---
 
-## 3. Rodar localmente (dev)
+## 3. Subir com Docker Compose (recomendado)
 
 ```bash
-npm install
-npm run dev
+docker compose up --build
 ```
 
 Acesse: **http://localhost:3000**
@@ -64,29 +63,10 @@ Depois é só logar normalmente.
 
 ---
 
-## 5. Subir em produção (build + start)
+## 5. Produção com Docker
 
-```bash
-npm install
-npm run build
-npm run start
-```
-
-Garanta que as variáveis de ambiente estejam configuradas no servidor.
-
----
-
-## 6. Deploy em serviços comuns
-
-**Vercel**
-1. Suba o repositório
-2. Configure as variáveis do `.env` na plataforma
-3. Deploy automático
-
-**Servidor próprio (Ubuntu/Docker)**
-1. Configure as variáveis
-2. `npm install && npm run build && npm run start`
-3. Use um proxy (Nginx) se quiser domínio/HTTPS
+Você pode usar o mesmo `docker compose up --build` em servidor.  
+Se preferir, adapte o `docker-compose.yml` e adicione um proxy (Nginx) para HTTPS/domínio.
 
 ---
 
