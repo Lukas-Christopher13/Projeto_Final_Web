@@ -29,6 +29,7 @@ export default function LoginPage() {
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(user));
     document.cookie = `token=${token}; path=/; max-age=${7 * 24 * 60 * 60}`;
+    window.dispatchEvent(new Event("auth-change"));
   };
 
   const handleLogin = async (e) => {

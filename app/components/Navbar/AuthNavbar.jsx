@@ -4,14 +4,25 @@ import { useState, useEffect } from "react";
 import Navbar from "@/app/components/Navbar/Navbar";
 
 export default function AuthNavbar() {
-    const [isLogged, setIsLogged] = useState(null);
-  
-    useEffect(() => {
+  const [isLogged, setIsLogged] = useState(null);
+
+  useEffect(() => {
+    const checkAuth = () => {
       const token = localStorage.getItem("token");
       setIsLogged(!!token);
-    }, []);
-  
-    if (isLogged === null) return null;
-  
-    return <>{isLogged && <Navbar />}</>;
-  }
+    };
+
+    checkAuth();
+    window.addEventListener("storage", checkAuth);
+    window.addEventListener("auth-change", checkAuth);
+
+    return () => {
+      window.removeEventListener("storage", checkAuth);
+      window.removeEventListener("auth-change", checkAuth);
+    };
+  }, []);
+
+  if (isLogged === null) return null;
+
+  return <>{isLogged && <Navbar />}</>;
+}

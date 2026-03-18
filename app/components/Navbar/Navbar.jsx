@@ -58,7 +58,14 @@ export default function Navbar() {
         >
           {darkMode ? <Sun size={18} /> : <Moon size={18} />}
         </button>
-        <button className={styles.botaoSair} onClick={() => { localStorage.clear(); router.push("/login")}}>
+        <button
+          className={styles.botaoSair}
+          onClick={() => {
+            localStorage.clear();
+            window.dispatchEvent(new Event("auth-change"));
+            router.push("/login");
+          }}
+        >
           <LogOut size={16}  />
           Sair
         </button>
