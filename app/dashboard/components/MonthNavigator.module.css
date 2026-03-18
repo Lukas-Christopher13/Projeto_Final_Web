@@ -1,0 +1,59 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.navBtn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  font-size: 20px;
+  color: #4b5563;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.navBtn:hover {
+  border-color: #a5b4fc;
+  color: #4f46e5;
+}
+
+.monthLabel {
+  min-width: 176px;
+  text-align: center;
+}
+
+.month {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.year {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-left: 8px;
+}
+
+.currentBtn {
+  font-size: 11px;
+  font-weight: 600;
+  color: #4f46e5;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  padding: 6px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.currentBtn:hover {
+  background: #e0e7ff;
+}

@@ -1,0 +1,17 @@
+.header {
+  margin-bottom: 8px;
+}
+
+.title {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  color: #1a1835;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #9491b4;
+  margin-top: 6px;
+}

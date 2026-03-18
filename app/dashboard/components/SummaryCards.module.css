@@ -1,0 +1,73 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  border-left: 4px solid transparent;
+}
+
+.cardIncome {
+  border-left-color: #34d399;
+}
+
+.cardExpense {
+  border-left-color: #f87171;
+}
+
+.cardBalancePos {
+  border-left-color: #6366f1;
+}
+
+.cardBalanceNeg {
+  border-left-color: #f59e0b;
+}
+
+.label {
+  font-size: 11px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 8px;
+}
+
+.valueIncome {
+  font-size: 24px;
+  font-weight: 700;
+  color: #059669;
+}
+
+.valueExpense {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ef4444;
+}
+
+.valueBalancePos {
+  font-size: 24px;
+  font-weight: 700;
+  color: #4f46e5;
+}
+
+.valueBalanceNeg {
+  font-size: 24px;
+  font-weight: 700;
+  color: #d97706;
+}
+
+.balanceHint {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 6px;
+}

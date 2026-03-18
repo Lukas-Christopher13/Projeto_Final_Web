@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.userName {
+  font-style: normal;
+  color: #4f46e5;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 6px;
+}
+
+.newButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #4f46e5;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.newButton:hover {
+  background: #4338ca;
+}
